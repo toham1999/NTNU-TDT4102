@@ -28,6 +28,11 @@ src = []
 exe = executable(
   'program',
   src,
+'ScreenGame.cpp',
+'ScreenHighscore.cpp',
+'ScreenMenu.cpp',
+'ScreenSettings.cpp',
+'SpaceDefender.cpp',
 'main.cpp',
   dependencies : [animationwindow_dep, sdl2_dep, std_lib_facilities_dep],
   cpp_args : compiler_flags
