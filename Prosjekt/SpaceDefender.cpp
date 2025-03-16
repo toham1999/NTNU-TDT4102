@@ -2,14 +2,16 @@
 
 #include <iostream>
 
-SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, const std::string& title)
-    : AnimationWindow(position.x, position.y, width, height, title),
-      StartGameBtn({200, 200}, 150, 50, "Start Game"),
-      HighscoresBtn({200, 270}, 150, 50, "Highscores"),
-      SettingsBtn({200, 300}, 150, 50, "Settings"),
-      EndGameBtn({200, 340}, 150, 50, "End Game"),
-      GoToMenuBtn({250, 340}, 150, 50, "Back to menu"),
-      currentScreen(nullptr)
+SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, const std::string& title): 
+    AnimationWindow(position.x, position.y, width, height, title),
+    StartGameBtn({200, 200}, 150, 50, "Start Game"),
+    HighscoresBtn({200, 270}, 150, 50, "Highscores"),
+    SettingsBtn({200, 300}, 150, 50, "Settings"),
+    EndGameBtn({200, 340}, 150, 50, "End Game"),
+    GoToMenuBtn({250, 340}, 150, 50, "Back to menu"),
+
+    playerShip(width/2,height*2/3),
+    currentScreen(nullptr)
 {
     setBackgroundColor(TDT4102::Color::black);
 
@@ -34,7 +36,7 @@ void SpaceDefender::setScreen(std::unique_ptr<Screen> newScreen) {
 }
 
 // Callbacks
-void SpaceDefender::cb_endGame()           {close();}
+void SpaceDefender::cb_endGame()        {close();}
 void SpaceDefender::cb_startGame()      {setScreen(std::make_unique<ScreenGame>());}
 void SpaceDefender::cb_showHighscores() {setScreen(std::make_unique<ScreenHighscore>());}
 void SpaceDefender::cb_settings()       {setScreen(std::make_unique<ScreenSettings>());}
@@ -45,9 +47,9 @@ void SpaceDefender::cb_menu()           {setScreen(std::make_unique<ScreenMenu>(
 void SpaceDefender::run() {
     while (!should_close()) {
         next_frame();
+        playerShip.movements(*this);
         if (currentScreen) {
-            //std::cout << "qwert" << std::endl;
-            currentScreen->draw(*this);  // Draw the current screen
+            currentScreen->draw(*this);         // Draw the current screen
             currentScreen->handleInput(*this);  // Handle input for the current screen
         }
     }

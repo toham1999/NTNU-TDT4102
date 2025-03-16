@@ -6,6 +6,7 @@
 #include "ScreenHighscore.h"
 #include "ScreenSettings.h"
 #include "ScreenGame.h"
+#include "SpaceShip.h"
 
 class Screen;
 
@@ -22,6 +23,9 @@ public:
 	TDT4102::Button SettingsBtn;
     TDT4102::Button EndGameBtn;
 	TDT4102::Button GoToMenuBtn;
+
+	// Spaceships 
+	SpaceShipPlayer playerShip;
 
 private:
 	std::unique_ptr<Screen> currentScreen;

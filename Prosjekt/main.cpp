@@ -1,7 +1,6 @@
 #include "std_lib_facilities.h"
 #include "SpaceDefender.h"
-#include "ScreenMenu.h"
-#include "ScreenHighscore.h"
+
 
 int main() {
     // Create SpaceDefender window and initialize with MenuScreen
