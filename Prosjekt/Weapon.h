@@ -17,6 +17,20 @@ protected:
 
 // ---- Bullet ----
 class Bullet : public Weapon {
-public:
-    void noe_ting() override;
-};
+    public:
+        void noe_ting() override;
+    };
+
+
+// ---- Bomb ----
+class Bomb : public Weapon {
+    public:
+        void noe_ting() override;
+    };
+
+
+// ---- Laser ----
+class Laser : public Weapon {
+    public:
+        void noe_ting() override;
+    };
