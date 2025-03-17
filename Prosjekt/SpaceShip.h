@@ -1,6 +1,6 @@
 #pragma once
 
-#include "subprojects\animationwindow\include\Image.h" //for image type
+#include "subprojects/animationwindow/include/Image.h" //for image type
 
 class SpaceDefender;  // Forward declaration of SpaceDefender to avoid circular dependency
 
