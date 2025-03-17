@@ -17,13 +17,15 @@ public:
     int getPositionY() const {return y;}
     int getShipHeight() const {return shipHeight;}
     int getShipWidth() const {return shipWidth;}
+    void setShipSpeed(const int &newSpeed) {this->shipSpeed = newSpeed;}
 
 protected:
     int x; // Positions
     int y;
     int health; // Life points
-    int shipHeight = 40;
-    int shipWidth = 40;
+    const int shipHeight = 20;
+    const int shipWidth = 20;
+    int shipSpeed;
 };
 
 // ---- SpaceShipPlayer ----
@@ -31,7 +33,9 @@ class SpaceShipPlayer : public SpaceShip {
     public:
         SpaceShipPlayer(int startX, int startY) : 
             SpaceShip(startX, startY, 3), 
-            playerImage("bilder/ShipSprite.png") {}
+            playerImage("bilder/ShipSprite.png") {
+            setShipSpeed(10);
+        }
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image playerImage;
@@ -42,8 +46,9 @@ class SpaceShipPlayer : public SpaceShip {
 class SpaceShipEnemy : public SpaceShip {
     public:
         SpaceShipEnemy(int startX, int startY) : 
-            SpaceShip(startX, startY, 1) {}
+            SpaceShip(startX, startY, 1),
+            alienImage("bilder/ailienHead.png") {}
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
-        
+        TDT4102::Image alienImage;
 };

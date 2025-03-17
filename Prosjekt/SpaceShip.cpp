@@ -6,10 +6,10 @@
 // ---- SpaceShipPlayer ----
 void SpaceShipPlayer::movements(SpaceDefender& window) {
     if (window.is_key_down(KeyboardKey::RIGHT) && x < window.width()) {
-        x+=5;
+        x+=shipSpeed;
     }
     else if (window.is_key_down(KeyboardKey::LEFT) && x > 0) {
-        x-=5;
+        x-=shipSpeed;
     }
 }
 void SpaceShipPlayer::shooting(SpaceDefender& window) {
