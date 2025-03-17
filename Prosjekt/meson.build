@@ -31,6 +31,7 @@ exe = executable(
 'Screen.cpp',
 'SpaceDefender.cpp',
 'SpaceShip.cpp',
+'Weapon.cpp',
 'main.cpp',
   dependencies : [animationwindow_dep, sdl2_dep, std_lib_facilities_dep],
   cpp_args : compiler_flags
