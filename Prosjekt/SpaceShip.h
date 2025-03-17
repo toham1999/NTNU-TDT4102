@@ -1,5 +1,6 @@
 #pragma once
 
+#include "subprojects\animationwindow\include\Image.h" //for image type
 
 class SpaceDefender;  // Forward declaration of SpaceDefender to avoid circular dependency
 
@@ -25,9 +26,13 @@ protected:
 // ---- SpaceShipPlayer ----
 class SpaceShipPlayer : public SpaceShip {
     public:
-        SpaceShipPlayer(unsigned int startX, unsigned int startY) : SpaceShip(startX, startY, 3) {}
+        SpaceShipPlayer(unsigned int startX, unsigned int startY) : SpaceShip(startX, startY, 3), playerImage("ShipSprite.png") { }
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
+        TDT4102::Image playerImage;
+    
+        unsigned int playerHeight = 50;
+        unsigned int playerWidth = 50;
 }; 
 
 
