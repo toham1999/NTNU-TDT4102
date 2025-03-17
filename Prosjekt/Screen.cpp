@@ -16,9 +16,10 @@ void ScreenMenu::draw(SpaceDefender& window) {
 // ---- ScreenGame ----
 void ScreenGame::draw(SpaceDefender& window) {
     window.draw_text({150, 100}, "Game screen", TDT4102::Color::cyan, 30);
-    //window.draw_circle({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 15, TDT4102::Color::white);
+    TDT4102::Image ailien = TDT4102::Image("ailienHead.png"); // sprite for ailien, burde bli vektor evt gjøre dette til en del av classen deres
+    //std::vector<TDT4102::Image> ailiens = {TDT4102::Image("ailienHead.png"), ailien, ailien}; // sprite for ailien
     for (SpaceShipEnemy enemyShip : window.enemyShips) {
-        window.draw_circle({enemyShip.getPositionX(),enemyShip.getPositionY()}, 15, TDT4102::Color::dark_cyan);
+        window.draw_image({enemyShip.getPositionX(),enemyShip.getPositionY()}, ailien, 20,25);
     }
     window.draw_image({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 
     window.playerShip.playerImage, window.playerShip.playerWidth, window.playerShip.playerHeight);
