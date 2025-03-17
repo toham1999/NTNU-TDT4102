@@ -50,7 +50,6 @@ void SpaceDefender::run() {
         playerShip.movements(*this);
         if (currentScreen) {
             currentScreen->draw(*this);         // Draw the current screen
-            currentScreen->handleInput(*this);  // Handle input for the current screen
         }
     }
 }

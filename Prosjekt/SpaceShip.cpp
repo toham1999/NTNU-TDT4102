@@ -2,7 +2,8 @@
 #include "SpaceDefender.h"
 #include <iostream>
 
-// ---- SpaceShipPlayer ---
+
+// ---- SpaceShipPlayer ----
 void SpaceShipPlayer::movements(SpaceDefender& window) {
     if (window.is_key_down(KeyboardKey::RIGHT) && x < window.width()) {
         x+=5;
@@ -16,7 +17,7 @@ void SpaceShipPlayer::shooting(SpaceDefender& window) {
 }
 
 
-// ---- SpaceShipEnemy ---
+// ---- SpaceShipEnemy ----
 void SpaceShipEnemy::movements(SpaceDefender& window) {
     (void)window;
 }

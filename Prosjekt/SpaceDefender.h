@@ -2,13 +2,10 @@
 
 #include "AnimationWindow.h"
 #include "widgets/Button.h"
-#include "ScreenMenu.h"
-#include "ScreenHighscore.h"
-#include "ScreenSettings.h"
-#include "ScreenGame.h"
+
+#include "Screen.h"
 #include "SpaceShip.h"
 
-class Screen;
 
 class SpaceDefender : public TDT4102::AnimationWindow {
 public:

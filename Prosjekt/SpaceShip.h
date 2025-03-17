@@ -23,6 +23,7 @@ protected:
 };
 
 
+// ---- SpaceShipPlayer ----
 class SpaceShipPlayer : public SpaceShip {
     public:
         SpaceShipPlayer(size_t startX, size_t startY) : SpaceShip(startX, startY, 3) {}
@@ -31,6 +32,7 @@ class SpaceShipPlayer : public SpaceShip {
 };
 
 
+// ---- SpaceShipEnemy ----
 class SpaceShipEnemy : public SpaceShip {
     public:
         SpaceShipEnemy(size_t startX, size_t startY) : SpaceShip(startX, startY, 1) {}

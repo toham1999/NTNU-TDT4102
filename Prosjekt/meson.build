@@ -28,10 +28,7 @@ src = []
 exe = executable(
   'program',
   src,
-'ScreenGame.cpp',
-'ScreenHighscore.cpp',
-'ScreenMenu.cpp',
-'ScreenSettings.cpp',
+'Screen.cpp',
 'SpaceDefender.cpp',
 'SpaceShip.cpp',
 'main.cpp',
