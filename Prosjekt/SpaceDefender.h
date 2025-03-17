@@ -23,6 +23,7 @@ public:
 
 	// Spaceships 
 	SpaceShipPlayer playerShip;
+    std::vector<SpaceShipEnemy> enemyShips;
 
 private:
 	std::unique_ptr<Screen> currentScreen;

@@ -10,7 +10,8 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     EndGameBtn({200, 340}, 150, 50, "End Game"),
     GoToMenuBtn({250, 340}, 150, 50, "Back to menu"),
 
-    playerShip(width/2,height*2/3),
+    playerShip(width/2,height*4/5),
+    enemyShips(),
     currentScreen(nullptr)
 {
     setBackgroundColor(TDT4102::Color::black);
@@ -28,6 +29,17 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     SettingsBtn.setCallback(std::bind(&SpaceDefender::cb_settings, this));
     EndGameBtn.setCallback(std::bind(&SpaceDefender::cb_endGame, this));
     GoToMenuBtn.setCallback(std::bind(&SpaceDefender::cb_menu, this));
+
+    // Add enemies to enemyShips vector
+    unsigned int numEnemiesHeight = 5;
+    unsigned int numEnemiesWidth = 10;
+    int spacing = width / (numEnemiesWidth + 1);
+    for (int j = 0;j < numEnemiesHeight;++j) {
+        for (int i = 0; i < numEnemiesWidth; ++i) {
+            enemyShips.emplace_back(spacing * (i + 1), spacing * (j + 1));
+        }
+    }
+
 }
 
 // Set the current screen
