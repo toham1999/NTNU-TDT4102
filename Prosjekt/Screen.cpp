@@ -20,7 +20,7 @@ void ScreenGame::draw(SpaceDefender& window) {
     for (SpaceShipEnemy enemyShip : window.enemyShips) {
         window.draw_circle({enemyShip.getPositionX(),enemyShip.getPositionY()}, 15, TDT4102::Color::dark_cyan);
     }
-        window.draw_image({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 
+    window.draw_image({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 
     window.playerShip.playerImage, window.playerShip.playerWidth, window.playerShip.playerHeight);
 
     // Hide unnecessary buttons for this screen
