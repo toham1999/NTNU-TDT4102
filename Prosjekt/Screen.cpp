@@ -16,7 +16,9 @@ void ScreenMenu::draw(SpaceDefender& window) {
 // ---- ScreenGame ----
 void ScreenGame::draw(SpaceDefender& window) {
     window.draw_text({150, 100}, "Game screen", TDT4102::Color::cyan, 30);
-    window.draw_circle({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 15, TDT4102::Color::white);
+    //window.draw_circle({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 15, TDT4102::Color::white);
+    window.draw_image({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 
+    window.playerShip.playerImage, window.playerShip.playerWidth, window.playerShip.playerHeight);
 
     // Hide unnecessary buttons for this screen
     window.StartGameBtn.setVisible(false);
