@@ -16,7 +16,7 @@ void ScreenMenu::draw(SpaceDefender& window) {
 // ---- ScreenGame ----
 void ScreenGame::draw(SpaceDefender& window) {
     for (SpaceShipEnemy enemyShip : window.enemyShips) {
-        window.draw_circle({enemyShip.getPositionX(),enemyShip.getPositionY()}, 10, TDT4102::Color::dark_cyan);
+        window.draw_image({enemyShip.getPositionX(),enemyShip.getPositionY()}, ailien, 20,25);
     }
     window.draw_image({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 
         window.playerShip.playerImage, window.playerShip.getShipWidth(), window.playerShip.getShipHeight());
