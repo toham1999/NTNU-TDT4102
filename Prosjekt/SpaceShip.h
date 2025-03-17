@@ -6,40 +6,43 @@ class SpaceDefender;  // Forward declaration of SpaceDefender to avoid circular 
 
 class SpaceShip {
 public:
-    SpaceShip(unsigned int startX, unsigned int startY, unsigned int startHealth) : x(startX), y(startY), health(startHealth) {}
+    SpaceShip(int startX, int startY, int startHealth) : x(startX), y(startY), health(startHealth) {}
     virtual ~SpaceShip() = default;  // Virtual destructor to ensure proper cleanup
 
     virtual void movements(SpaceDefender& window) = 0;
     virtual void shooting(SpaceDefender& window) = 0;
     void healthReduction() { --health; }
-    unsigned int getHealth() const {return health;}
+    int getHealth() const {return health;}
     int getPositionX() const {return x;}
     int getPositionY() const {return y;}
+    int getShipHeight() const {return shipHeight;}
+    int getShipWidth() const {return shipWidth;}
 
 protected:
-    unsigned int x; // Positions
-    unsigned int y;
-    unsigned int health; // Life points
+    int x; // Positions
+    int y;
+    int health; // Life points
+    int shipHeight = 40;
+    int shipWidth = 40;
 };
-
 
 // ---- SpaceShipPlayer ----
 class SpaceShipPlayer : public SpaceShip {
     public:
-        SpaceShipPlayer(unsigned int startX, unsigned int startY) : SpaceShip(startX, startY, 3), playerImage("ShipSprite.png") { }
+        SpaceShipPlayer(int startX, int startY) : 
+            SpaceShip(startX, startY, 3), 
+            playerImage("bilder/ShipSprite.png") {}
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image playerImage;
-    
-        unsigned int playerHeight = 50;
-        unsigned int playerWidth = 50;
 }; 
 
 
 // ---- SpaceShipEnemy ----
 class SpaceShipEnemy : public SpaceShip {
     public:
-        SpaceShipEnemy(unsigned int startX = 100, unsigned int startY = 100) : SpaceShip(startX, startY, 1) {}
+        SpaceShipEnemy(int startX, int startY) : 
+            SpaceShip(startX, startY, 1) {}
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         
