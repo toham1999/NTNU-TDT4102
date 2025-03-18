@@ -16,8 +16,8 @@ void ScreenMenu::draw(SpaceDefender& window) {
 // ---- ScreenGame ----
 void ScreenGame::draw(SpaceDefender& window) {
     for (SpaceShipEnemy enemyShip : window.enemyShips) {
-        window.draw_image({enemyShip.getPositionX(),enemyShip.getPositionY()}, 
-        enemyShip.alienImage, enemyShip.getShipWidth(),enemyShip.getShipHeight());
+        window.draw_circle({enemyShip.getPositionX(),enemyShip.getPositionY()},10,TDT4102::Color::antique_white);
+        //window.draw_image({enemyShip.getPositionX(),enemyShip.getPositionY()}, enemyShip.alienImage, enemyShip.getShipWidth(),enemyShip.getShipHeight());
     }
     window.draw_image({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, 
     window.playerShip.playerImage, window.playerShip.getShipWidth(), window.playerShip.getShipHeight());
@@ -28,6 +28,16 @@ void ScreenGame::draw(SpaceDefender& window) {
     window.SettingsBtn.setVisible(false);
     window.EndGameBtn.setVisible(false);
     window.GoToMenuBtn.setVisible(true);
+
+    // Update and draw fired weapons
+    for (auto& weaponPtr : window.firedWeapons) {
+        weaponPtr->move();
+        weaponPtr->draw(window);
+    }
+
+    // Update spaceship movements and shooting
+    window.playerShip.movements(window);
+    window.playerShip.shooting(window);
 }
 
 
