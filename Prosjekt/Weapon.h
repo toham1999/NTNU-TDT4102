@@ -8,9 +8,13 @@ public:
     Weapon(unsigned int speed,unsigned int damage) : speed(speed), damage(damage) {}
     virtual ~Weapon() = default;  // Virtual destructor to ensure proper cleanup
     virtual void noe_ting() = 0;
+    void setPossision(unsigned int inx, unsigned int iny){x = inx; y = iny;} // setter posisjon
+    unsigned int getDamage() const {return damage;}
+    unsigned int x; // possisjon for skudd
+    unsigned int y;
 
 protected:
-    unsigned int speed;
+    unsigned int speed; // det  du inkrimenterer possisjonen til
     unsigned int damage;
 };
 
