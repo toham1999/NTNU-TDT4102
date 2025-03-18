@@ -59,14 +59,7 @@ void SpaceDefender::cb_menu()           {setScreen(std::make_unique<ScreenMenu>(
 void SpaceDefender::run() {
     while (!should_close()) {
         next_frame();
-        playerShip.movements(*this);
-        playerShip.shooting(*this);
 
-        // Update and draw fired weapons
-        for (auto& weaponPtr : firedWeapons) {
-            weaponPtr->move();  // Move and draw each fired weapon
-            weaponPtr->draw(*this);
-        }
         if (currentScreen) {
             currentScreen->draw(*this);         // Draw the current screen
         }
