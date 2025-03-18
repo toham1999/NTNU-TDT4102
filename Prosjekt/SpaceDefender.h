@@ -5,6 +5,7 @@
 
 #include "Screen.h"
 #include "SpaceShip.h"
+#include "Weapon.h"
 
 
 class SpaceDefender : public TDT4102::AnimationWindow {
@@ -24,6 +25,9 @@ public:
 	// Spaceships 
 	SpaceShipPlayer playerShip;
     std::vector<SpaceShipEnemy> enemyShips;
+
+    // Weapons
+    std::vector<std::unique_ptr<Weapon>> firedWeapons;
 
 private:
 	std::unique_ptr<Screen> currentScreen;

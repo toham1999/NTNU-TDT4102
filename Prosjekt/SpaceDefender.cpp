@@ -12,6 +12,7 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
 
     playerShip(width/2,height*4/5),
     enemyShips(),
+    firedWeapons(),
     currentScreen(nullptr)
 {
     setBackgroundColor(TDT4102::Color::black);
@@ -31,15 +32,14 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     GoToMenuBtn.setCallback(std::bind(&SpaceDefender::cb_menu, this));
 
     // Add enemies to enemyShips vector
-    unsigned int numEnemiesHeight = 5;
-    unsigned int numEnemiesWidth = 10;
+     int numEnemiesHeight = 5;
+    int numEnemiesWidth = 10;
     int spacing = width / (numEnemiesWidth + 1);
     for (int j = 0;j < numEnemiesHeight;++j) {
         for (int i = 0; i < numEnemiesWidth; ++i) {
             enemyShips.emplace_back(spacing * (i + 1), spacing * (j + 1));
         }
     }
-
 }
 
 // Set the current screen
@@ -60,6 +60,13 @@ void SpaceDefender::run() {
     while (!should_close()) {
         next_frame();
         playerShip.movements(*this);
+        playerShip.shooting(*this);
+
+        // Update and draw fired weapons
+        for (auto& weaponPtr : firedWeapons) {
+            weaponPtr->move();  // Move and draw each fired weapon
+            weaponPtr->draw(*this);
+        }
         if (currentScreen) {
             currentScreen->draw(*this);         // Draw the current screen
         }

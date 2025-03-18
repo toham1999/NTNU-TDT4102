@@ -1,40 +1,42 @@
 #pragma once
-#include <cstddef>  // For size_t
 
 class SpaceDefender;  // Forward declaration of SpaceDefender to avoid circular dependency
 
 class Weapon {
 public:
-    Weapon(unsigned int speed,unsigned int damage) : speed(speed), damage(damage) {}
+    Weapon(int speed, int damage) : speed(speed), damage(damage) {}
     virtual ~Weapon() = default;  // Virtual destructor to ensure proper cleanup
-    virtual void noe_ting() = 0;
-    void setPossision(unsigned int inx, unsigned int iny){x = inx; y = iny;} // setter posisjon
-    unsigned int getDamage() const {return damage;}
-    unsigned int x; // possisjon for skudd
-    unsigned int y;
+    virtual void fireWeapon(SpaceDefender& window) = 0;
+    int getSpeed() {return speed;}
+    int getDamage() {return damage;}
+    virtual void move() {yProjectile -=speed;}
+    virtual void draw(SpaceDefender& window) = 0;
 
 protected:
-    unsigned int speed; // det  du inkrimenterer possisjonen til
-    unsigned int damage;
+    int speed;
+    int damage;
+    int xProjectile;
+    int yProjectile;
 };
-
 
 // ---- Bullet ----
 class Bullet : public Weapon {
-    public:
-        void noe_ting() override;
-    };
-
+public:
+    Bullet(int speed, int damage) : Weapon(speed, damage) {}
+    void fireWeapon(SpaceDefender& window) override;
+    void draw(SpaceDefender& window) override;
+};
 
 // ---- Bomb ----
 class Bomb : public Weapon {
-    public:
-        void noe_ting() override;
-    };
-
+public:
+    Bomb(int speed, int damage) : Weapon(speed, damage) {}
+    void fireWeapon(SpaceDefender& window) override;
+};
 
 // ---- Laser ----
 class Laser : public Weapon {
-    public:
-        void noe_ting() override;
-    };
+public:
+    Laser(int speed, int damage) : Weapon(speed, damage) {}
+    void fireWeapon(SpaceDefender& window) override;
+};
