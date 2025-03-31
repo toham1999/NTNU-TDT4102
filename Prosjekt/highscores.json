@@ -1,0 +1,14 @@
+{
+    "highscores": [
+        { "rank": 1, "player": "Player1", "score": 100 },
+        { "rank": 2, "player": "Player2", "score": 80 },
+        { "rank": 3, "player": "Player3", "score": 60 },
+        { "rank": 4, "player": "Player4", "score": 50 },
+        { "rank": 5, "player": "Player5", "score": 40 },
+        { "rank": 6, "player": "Player6", "score": 30 },
+        { "rank": 7, "player": "Player7", "score": 25 },
+        { "rank": 8, "player": "Player8", "score": 20 },
+        { "rank": 9, "player": "Player9", "score": 15 },
+        { "rank": 10, "player": "Player10", "score": 10 }
+    ]
+}
