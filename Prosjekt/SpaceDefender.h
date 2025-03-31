@@ -9,9 +9,22 @@
 
 
 class SpaceDefender : public TDT4102::AnimationWindow {
-public:
-    SpaceDefender(TDT4102::Point position, int width, int height, const std::string& title = "Space Defender");
+private:
+	std::unique_ptr<Screen> currentScreen;
 
+    // Define button width and height based on screen size
+    unsigned int btnWidth;
+    unsigned int btnHeight;
+
+    // Callback functions for buttons
+    void cb_startGame();
+    void cb_showHighscores();
+	void cb_settings();
+	void cb_endGame();
+	void cb_menu();
+
+public:
+    SpaceDefender(TDT4102::Point position = {100, 100}, int width = 600, int height = 800, const std::string& title = "Space Defender");
     void setScreen(std::unique_ptr<Screen> newScreen);
     void run();
 
@@ -28,14 +41,4 @@ public:
 
     // Weapons
     std::vector<std::unique_ptr<Weapon>> firedWeapons;
-
-private:
-	std::unique_ptr<Screen> currentScreen;
-
-    // Callback functions for buttons
-    void cb_startGame();
-    void cb_showHighscores();
-	void cb_settings();
-	void cb_endGame();
-	void cb_menu();
 };

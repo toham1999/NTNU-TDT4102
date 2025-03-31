@@ -44,7 +44,7 @@ void ScreenGame::draw(SpaceDefender& window) {
 
 // ---- ScreenHighscore ----
 void ScreenHighscore::draw(SpaceDefender& window) {
-    window.draw_text({150, 100}, "Highscores", TDT4102::Color::cyan, 30);
+    window.draw_text({window.width()/2, 100}, "TOP 10 SCORES", TDT4102::Color::aqua, 30);
     window.draw_text({150, 150}, "1. Player1 - 100", TDT4102::Color::white, 20);
     window.draw_text({150, 180}, "2. Player2 - 80", TDT4102::Color::white, 20);
     window.draw_text({150, 210}, "3. Player3 - 60", TDT4102::Color::white, 20);
@@ -64,8 +64,8 @@ void ScreenSettings::draw(SpaceDefender& window) {
 
     // Hide unnecessary buttons for this screen
     window.StartGameBtn.setVisible(false);
-    window.HighscoresBtn.setVisible(true);
-    window.SettingsBtn.setVisible(true);
+    window.HighscoresBtn.setVisible(false);
+    window.SettingsBtn.setVisible(false);
     window.EndGameBtn.setVisible(false);
     window.GoToMenuBtn.setVisible(true);
 }

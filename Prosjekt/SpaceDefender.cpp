@@ -4,16 +4,20 @@
 
 SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, const std::string& title): 
     AnimationWindow(position.x, position.y, width, height, title),
-    StartGameBtn({200, 200}, 150, 50, "Start Game"),
-    HighscoresBtn({200, 270}, 150, 50, "Highscores"),
-    SettingsBtn({200, 300}, 150, 50, "Settings"),
-    EndGameBtn({200, 340}, 150, 50, "End Game"),
-    GoToMenuBtn({250, 340}, 150, 50, "Back to menu"),
+    currentScreen(nullptr),
+    btnWidth(static_cast<unsigned int>(width * 0.4)),      // 40% of window width
+    btnHeight(static_cast<unsigned int>(height * 0.08)),   // 8% of window height 
+
+    // Position buttons relatively
+    StartGameBtn( TDT4102::Point(width / 2 - static_cast<int>(btnWidth / 2), static_cast<int>(height * 0.3)),                   btnWidth, btnHeight, "Start Game"),
+    HighscoresBtn(TDT4102::Point(width / 2 - static_cast<int>(btnWidth / 2), static_cast<int>(height * 0.3 + btnHeight * 1.2)), btnWidth, btnHeight, "Highscores"),
+    SettingsBtn(  TDT4102::Point(width / 2 - static_cast<int>(btnWidth / 2), static_cast<int>(height * 0.3 + btnHeight * 2.4)), btnWidth, btnHeight, "Settings"),
+    EndGameBtn(   TDT4102::Point(width / 2 - static_cast<int>(btnWidth / 2), static_cast<int>(height * 0.3 + btnHeight * 3.6)), btnWidth, btnHeight, "End Game"),
+    GoToMenuBtn(  TDT4102::Point(0, 0), btnWidth/3, btnHeight, "Back"),
 
     playerShip(width/2,height*4/5),
     enemyShips(),
-    firedWeapons(),
-    currentScreen(nullptr)
+    firedWeapons()
 {
     setBackgroundColor(TDT4102::Color::black);
 
@@ -32,7 +36,7 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     GoToMenuBtn.setCallback(std::bind(&SpaceDefender::cb_menu, this));
 
     // Add enemies to enemyShips vector
-     int numEnemiesHeight = 5;
+    int numEnemiesHeight = 5;
     int numEnemiesWidth = 10;
     int spacing = width / (numEnemiesWidth + 1);
     for (int j = 0;j < numEnemiesHeight;++j) {
