@@ -1,9 +1,8 @@
 /**
  * @file Screen.cpp
- * 
- * @author Tor Gunnar Ravatn Hammer (you@domain.com)
- * @brief 
- * @version 0.1
+ * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
+ * @brief The cpp file for the Screen class
+ * @version 1.0
  * @date 2025-04-01
  * 
  * @copyright Copyright (c) 2025
@@ -15,13 +14,13 @@
 
 
 /**
- * @brief 
+ * @fn void ScreenMenu::draw(SpaceDefender& window)
+ * @brief Draws the screencontent of the Menu
  * 
- * @param window 
+ * Draws the menu screen where it shows all the buttons exept the back button.
+ * @param window SpaceDefender object
  */
-// ---- ScreenMenu ----
 void ScreenMenu::draw(SpaceDefender& window) {
-    //window.draw_text({150, 100}, "Menu", TDT4102::Color::cyan, 30);
     window.StartGameBtn.setVisible(true);
     window.HighscoresBtn.setVisible(true);
     window.SettingsBtn.setVisible(true);
@@ -30,7 +29,13 @@ void ScreenMenu::draw(SpaceDefender& window) {
 }
 
 
-// ---- ScreenGame ----
+/**
+ * @fn void ScreenGame::draw(SpaceDefender& window)
+ * @brief Draws the screencontent of the Game
+ * 
+ * Draws and updates, enemie ships, the player ship and fired weapons. 
+ * @param window SpaceDefender object
+ */
 void ScreenGame::draw(SpaceDefender& window) {
     for (SpaceShipEnemy enemyShip : window.enemyShips) {
         //window.draw_circle({enemyShip.getPositionX(),enemyShip.getPositionY()},10,TDT4102::Color::antique_white);
@@ -59,7 +64,14 @@ void ScreenGame::draw(SpaceDefender& window) {
 }
 
 
-// ---- ScreenHighscore ----
+/**
+ * @fn void ScreenHighscore::draw(SpaceDefender& window)
+ * @brief Draws the screencontent of the Highscore
+ * 
+ * Draws the highscore screen, and show the back button.
+ * @todo Add highscores to the screen that is read from a json file
+ * @param window SpaceDefender object
+ */
 void ScreenHighscore::draw(SpaceDefender& window) {
     window.draw_text({window.width()/2 - window.width()/4, window.height()/20}, "TOP 10 SCORES", TDT4102::Color::aqua,  35);
     // Headline row
@@ -72,7 +84,6 @@ void ScreenHighscore::draw(SpaceDefender& window) {
     window.draw_text({150, 240}, "4. Player4 - 40  Round 1", TDT4102::Color::white, 20);
 
 
-    // Hide unnecessary buttons for this screen
     window.StartGameBtn.setVisible(false);
     window.HighscoresBtn.setVisible(false);
     window.SettingsBtn.setVisible(false);
@@ -81,11 +92,17 @@ void ScreenHighscore::draw(SpaceDefender& window) {
 }
 
 
-// ---- ScreenSettings ----
+/**
+ * @fn void ScreenSettings::draw(SpaceDefender& window)
+ * @brief Draws the screencontent of the Settings
+ * 
+ * Draws the settings screen, where you can change the game settings
+ * @todo Add settings to the screen
+ * @param window SpaceDefender object
+ */
 void ScreenSettings::draw(SpaceDefender& window) {
     window.draw_text({window.width()*2/5, 100}, "Settings", TDT4102::Color::cyan, window.height()/20); 
 
-    // Hide unnecessary buttons for this screen
     window.StartGameBtn.setVisible(false);
     window.HighscoresBtn.setVisible(false);
     window.SettingsBtn.setVisible(false);
