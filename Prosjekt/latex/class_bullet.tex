@@ -1,0 +1,70 @@
+\doxysection{Bullet Class Reference}
+\hypertarget{class_bullet}{}\label{class_bullet}\index{Bullet@{Bullet}}
+Inheritance diagram for Bullet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bullet}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_bullet_a1bfc1427c2ed14e11eb3544df0114923}\label{class_bullet_a1bfc1427c2ed14e11eb3544df0114923} 
+{\bfseries Bullet} (int speed, int damage)
+\item 
+void \mbox{\hyperlink{class_bullet_a151d1381e2ba6f55337f249d7e3d7bb6}{fire\+Weapon}} (\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&window) override
+\item 
+void \mbox{\hyperlink{class_bullet_a57b52deccb3091f7a02ce94e2d15812d}{draw}} (\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&window) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_weapon}{Weapon}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Weapon} (int speed, int damage)
+\item 
+int {\bfseries get\+Speed} ()
+\item 
+int {\bfseries get\+Damage} ()
+\item 
+virtual void {\bfseries move} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_weapon}{Weapon}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries speed}
+\item 
+int {\bfseries damage}
+\item 
+int {\bfseries x\+Projectile}
+\item 
+int {\bfseries y\+Projectile}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bullet_a57b52deccb3091f7a02ce94e2d15812d}\index{Bullet@{Bullet}!draw@{draw}}
+\index{draw@{draw}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily \label{class_bullet_a57b52deccb3091f7a02ce94e2d15812d} 
+void Bullet\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&}]{window}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_weapon}{Weapon}}.
+
+\Hypertarget{class_bullet_a151d1381e2ba6f55337f249d7e3d7bb6}\index{Bullet@{Bullet}!fireWeapon@{fireWeapon}}
+\index{fireWeapon@{fireWeapon}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{fireWeapon()}{fireWeapon()}}
+{\footnotesize\ttfamily \label{class_bullet_a151d1381e2ba6f55337f249d7e3d7bb6} 
+void Bullet\+::fire\+Weapon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&}]{window}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_weapon}{Weapon}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Weapon.\+h\item 
+Weapon.\+cpp\end{DoxyCompactItemize}

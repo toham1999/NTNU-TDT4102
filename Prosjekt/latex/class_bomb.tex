@@ -1,0 +1,60 @@
+\doxysection{Bomb Class Reference}
+\hypertarget{class_bomb}{}\label{class_bomb}\index{Bomb@{Bomb}}
+Inheritance diagram for Bomb\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bomb}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_bomb_a58a908c99a7b9b5508bdb1a17d59a9a8}\label{class_bomb_a58a908c99a7b9b5508bdb1a17d59a9a8} 
+{\bfseries Bomb} (int speed, int damage)
+\item 
+void \mbox{\hyperlink{class_bomb_a72d3eecdf70c1c04c78b4830f0c22bd2}{fire\+Weapon}} (\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&window) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_weapon}{Weapon}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Weapon} (int speed, int damage)
+\item 
+int {\bfseries get\+Speed} ()
+\item 
+int {\bfseries get\+Damage} ()
+\item 
+virtual void {\bfseries move} ()
+\item 
+virtual void {\bfseries draw} (\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&window)=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_weapon}{Weapon}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries speed}
+\item 
+int {\bfseries damage}
+\item 
+int {\bfseries x\+Projectile}
+\item 
+int {\bfseries y\+Projectile}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bomb_a72d3eecdf70c1c04c78b4830f0c22bd2}\index{Bomb@{Bomb}!fireWeapon@{fireWeapon}}
+\index{fireWeapon@{fireWeapon}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{fireWeapon()}{fireWeapon()}}
+{\footnotesize\ttfamily \label{class_bomb_a72d3eecdf70c1c04c78b4830f0c22bd2} 
+void Bomb\+::fire\+Weapon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&}]{window}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_weapon}{Weapon}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Weapon.\+h\item 
+Weapon.\+cpp\end{DoxyCompactItemize}

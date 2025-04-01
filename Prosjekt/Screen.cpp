@@ -1,7 +1,24 @@
+/**
+ * @file Screen.cpp
+ * 
+ * @author Tor Gunnar Ravatn Hammer (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2025-04-01
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #include "Screen.h"
 #include "SpaceDefender.h"
 
 
+
+/**
+ * @brief 
+ * 
+ * @param window 
+ */
 // ---- ScreenMenu ----
 void ScreenMenu::draw(SpaceDefender& window) {
     //window.draw_text({150, 100}, "Menu", TDT4102::Color::cyan, 30);
