@@ -1,8 +1,14 @@
 # Ignore specific folders
-Prosjekt/Doxyfile
-Prosjekt/Doxyfile.bak
-*Prosjekt/latex
-Prosjekt/html
+latex/
+html/
+
+# Allow one specific file (e.g., important.pdf)
+!latex/refman.pdf
+
+
+# Ignore specific files
+Doxyfile
+Doxyfile.bak
 
 # Other from myself
 *.DS_Store
