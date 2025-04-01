@@ -19,6 +19,7 @@ void SpaceShipPlayer::shooting(SpaceDefender& window) {
         window.firedWeapons.emplace_back(std::move(newBullet));  // Store the bullet
     }
 }
+// hei tor
 
 
 // ---- SpaceShipEnemy ----
