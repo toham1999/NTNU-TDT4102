@@ -1,0 +1,88 @@
+\doxysection{Space\+Ship\+Enemy Class Reference}
+\hypertarget{class_space_ship_enemy}{}\label{class_space_ship_enemy}\index{SpaceShipEnemy@{SpaceShipEnemy}}
+Inheritance diagram for Space\+Ship\+Enemy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_space_ship_enemy}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_space_ship_enemy_a1a48edd0d68baf13025323def5807b35}\label{class_space_ship_enemy_a1a48edd0d68baf13025323def5807b35} 
+{\bfseries Space\+Ship\+Enemy} (int startX, int startY)
+\item 
+void \mbox{\hyperlink{class_space_ship_enemy_a1827f6fe1239cbd8b19ed59e1b1e895c}{movements}} (\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&window) override
+\item 
+void \mbox{\hyperlink{class_space_ship_enemy_a6c86ec90c21bcd6a19b60a1355b17566}{shooting}} (\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&window) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_space_ship}{Space\+Ship}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Space\+Ship} (int startX, int startY, int start\+Health)
+\item 
+void {\bfseries health\+Reduction} ()
+\item 
+int {\bfseries get\+Health} () const
+\item 
+int {\bfseries get\+PositionX} () const
+\item 
+int {\bfseries get\+PositionY} () const
+\item 
+int {\bfseries get\+Ship\+Height} () const
+\item 
+int {\bfseries get\+Ship\+Width} () const
+\item 
+void {\bfseries set\+Ship\+Speed} (const int \&new\+Speed)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_space_ship_enemy_af8887c2a55fe828e8b5ad5604a2b5c82}\label{class_space_ship_enemy_af8887c2a55fe828e8b5ad5604a2b5c82} 
+TDT4102\+::\+Image {\bfseries alien\+Image}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_space_ship}{Space\+Ship}}}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries x}
+\item 
+int {\bfseries y}
+\item 
+int {\bfseries health}
+\item 
+const int {\bfseries ship\+Height} = 20
+\item 
+const int {\bfseries ship\+Width} = 20
+\item 
+int {\bfseries ship\+Speed}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_space_ship_enemy_a1827f6fe1239cbd8b19ed59e1b1e895c}\index{SpaceShipEnemy@{SpaceShipEnemy}!movements@{movements}}
+\index{movements@{movements}!SpaceShipEnemy@{SpaceShipEnemy}}
+\doxysubsubsection{\texorpdfstring{movements()}{movements()}}
+{\footnotesize\ttfamily \label{class_space_ship_enemy_a1827f6fe1239cbd8b19ed59e1b1e895c} 
+void Space\+Ship\+Enemy\+::movements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&}]{window}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_space_ship}{Space\+Ship}}.
+
+\Hypertarget{class_space_ship_enemy_a6c86ec90c21bcd6a19b60a1355b17566}\index{SpaceShipEnemy@{SpaceShipEnemy}!shooting@{shooting}}
+\index{shooting@{shooting}!SpaceShipEnemy@{SpaceShipEnemy}}
+\doxysubsubsection{\texorpdfstring{shooting()}{shooting()}}
+{\footnotesize\ttfamily \label{class_space_ship_enemy_a6c86ec90c21bcd6a19b60a1355b17566} 
+void Space\+Ship\+Enemy\+::shooting (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_space_defender}{Space\+Defender}} \&}]{window}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_space_ship}{Space\+Ship}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Space\+Ship.\+h\item 
+Space\+Ship.\+cpp\end{DoxyCompactItemize}

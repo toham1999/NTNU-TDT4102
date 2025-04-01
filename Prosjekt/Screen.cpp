@@ -1,7 +1,24 @@
+/**
+ * @file Screen.cpp
+ * 
+ * @author Tor Gunnar Ravatn Hammer (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2025-04-01
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #include "Screen.h"
 #include "SpaceDefender.h"
 
 
+
+/**
+ * @brief 
+ * 
+ * @param window 
+ */
 // ---- ScreenMenu ----
 void ScreenMenu::draw(SpaceDefender& window) {
     //window.draw_text({150, 100}, "Menu", TDT4102::Color::cyan, 30);
@@ -53,12 +70,6 @@ void ScreenHighscore::draw(SpaceDefender& window) {
     window.draw_text({150, 180}, "2. Player2 - 80  Round 1", TDT4102::Color::white, 20);
     window.draw_text({150, 210}, "3. Player3 - 60  Round 1", TDT4102::Color::white, 20);
     window.draw_text({150, 240}, "4. Player4 - 40  Round 1", TDT4102::Color::white, 20);
-    window.draw_text({150, 270}, "5. Player5 - 30  Round 1", TDT4102::Color::white, 20);
-    window.draw_text({150, 300}, "6. Player6 - 20  Round 1", TDT4102::Color::white, 20);
-    window.draw_text({150, 330}, "7. Player7 - 15  Round 1", TDT4102::Color::white, 20);
-    window.draw_text({150, 360}, "8. Player8 - 10  Round 1", TDT4102::Color::white, 20);
-    window.draw_text({150, 390}, "9. Player9 - 50  Round 1", TDT4102::Color::white, 20);
-    window.draw_text({150, 420}, "10. Player10 - 0  Round 1", TDT4102::Color::white, 20);
 
 
     // Hide unnecessary buttons for this screen

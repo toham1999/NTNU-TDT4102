@@ -1,7 +1,27 @@
+/**
+ * @file SpaceDefender.cpp
+ * @author your name (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2025-04-01
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
 #include "SpaceDefender.h"
 
 #include <iostream>
 
+
+/**
+ * @brief Construct a new Space Defender:: Space Defender object
+ * 
+ * @param position 
+ * @param width 
+ * @param height 
+ * @param title 
+ */
 SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, const std::string& title): 
     AnimationWindow(position.x, position.y, width, height, title),
     currentScreen(nullptr),
