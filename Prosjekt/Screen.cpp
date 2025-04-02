@@ -31,35 +31,110 @@ void ScreenGame::draw(SpaceDefender& window) {
     window.GoToMenuBtn.setVisible(true);
 
     // Update and draw fired weapons
+/*
     for (auto& weaponPtr : window.firedWeapons) {
         // Check if the weapon is out of the screen, stops memory leakage
         if (weaponPtr->getPositionY() < 0) {
-            window.firedWeapons.erase(std::remove(window.firedWeapons.begin(), window.firedWeapons.end(), weaponPtr), window.firedWeapons.end());
+            window.firedWeapons.pop_back();
         }
         if (weaponPtr->getPositionY() > window.height()) {
             weaponPtr -> ~Weapon();
+            weaponPtr = nullptr;
+            break;
         }
+    
         weaponPtr->move();
         weaponPtr->draw(window);
         
         // Check if the weapon hit the enemy ship
         
         for (SpaceShipEnemy& enemyShip : window.enemyShips) {
-            if (weaponPtr->getPositionX() >= enemyShip.getPositionX() &&
-                weaponPtr->getPositionX() <= enemyShip.getPositionX() + enemyShip.getShipWidth() &&
-                weaponPtr->getPositionY() >= enemyShip.getPositionY() &&
+            if (weaponPtr->getPositionX() >= enemyShip.getPositionX() ||
+                weaponPtr->getPositionX() <= enemyShip.getPositionX() + enemyShip.getShipWidth() ||
+                weaponPtr->getPositionY() >= enemyShip.getPositionY() ||
                 weaponPtr->getPositionY() <= enemyShip.getPositionY() + enemyShip.getShipHeight()) {
                 //window.firedWeapons.erase(window.firedWeapons.begin());
 
                 enemyShip.healthReduction(weaponPtr->getDamage());
-                weaponPtr -> ~Weapon();
+                window.firedWeapons.erase(std::remove(window.firedWeapons.begin(), window.firedWeapons.end(), weaponPtr), window.firedWeapons.end());
                 if (enemyShip.getHealth() <= 0) {
-                    enemyShip.~SpaceShipEnemy();
+                    //window.enemyShips.erase(std::remove(window.enemyShips.begin(), window.enemyShips.end(), enemyShip), window.enemyShips.end());
+                    //enemyShip.~SpaceShipEnemy();
+                    window.enemyShips.pop_back();
                 }
             } 
         }
     }
+    */
+    // itereator version
+    if(!window.firedWeapons.empty()){
+        std::vector<std::unique_ptr<Weapon>> firedWeaponsCopy;
+        
+        for(auto it = window.firedWeapons.begin(); it != window.firedWeapons.end();)
+        {  
+            for(int i = 0; i < window.enemyShips.size(); i++)
+            {
+                auto itEnemy = window.enemyShips.at(i);
+                if((itEnemy.getPositionX()<=(*it)->getPositionX() && (*it)->getPositionX()<= itEnemy.getPositionX() + itEnemy.getShipWidth()) &&
+                ((*it)->getPositionY() <= (itEnemy).getPositionY() + (itEnemy).getShipHeight()))
+                {
+                    //window.enemyShips.erase(window.enemyShips.at(i));
 
+                    /*window.enemyShips.erase(std::remove_if(window.enemyShips.begin(), window.enemyShips.end(), [](SpaceShipEnemy& enemyShip) 
+                    {
+                        return ((itEnemy->getPositionX()<=(*it)->getPositionX() && (*it)->getPositionX()<= (itEnemy)->getPositionX() + (itEnemy)->getShipWidth()) &&
+                        ((*it)->getPositionY() <= (itEnemy)->getPositionY() + (itEnemy)->getShipHeight()));}
+                    ))
+                    */
+                    /*
+                    (itEnemy)->healthReduction((*it)->getDamage());
+                    it = window.firedWeapons.erase(it);
+                    if ((itEnemy)->getHealth() <= 0) {
+                        window.enemyShips.erase(itEnemy);
+                        
+                        } */
+                }
+                else{
+                    //itEnemy++;
+                    //break;
+                }
+            } 
+            auto a = window.enemyShips.begin();
+            std::cout << window.firedWeapons.begin() << std::endl;
+            //window.firedWeapons.erase();
+            
+            // Check if the weapon is out of the screen, stops memory leakage WORKS!!!
+        
+            if ((*it)->getPositionY() < 100)
+            {
+                it = window.firedWeapons.erase(it);
+            }
+            else{
+                (*it)->move();
+                (*it)->draw(window);
+                it++;
+            }
+            
+        
+            /*
+            if (((itEnemy)->getPositionX()>=(*it)->getPositionX()<= (itEnemy)->getPositionX() + (itEnemy)->getShipWidth())&&
+                ((*it)->getPositionY() <= (itEnemy)->getPositionY() + (itEnemy)->getShipHeight()) )
+            for(auto itEnemy = window.enemyShips.begin(); itEnemy != window.enemyShips.end(); itEnemy++){
+                if (((itEnemy)->getPositionX()>=(*it)->getPositionX()<= (itEnemy)->getPositionX() + (itEnemy)->getShipWidth())&&
+                ((*it)->getPositionY() <= (itEnemy)->getPositionY() + (itEnemy)->getShipHeight()) ){
+                    (*itEnemy).healthReduction((*it)->getDamage());
+                    window.firedWeapons.erase(it);
+                    if ((*itEnemy).getHealth() <= 0) {
+                        window.enemyShips.erase(itEnemy);
+                    }
+        }}
+            */
+
+        
+        }
+    }
+    
+    
     // Update spaceship movements and shooting
     window.playerShip.movements(window);
     window.playerShip.shooting(window);
