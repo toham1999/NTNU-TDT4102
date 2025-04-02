@@ -1,8 +1,9 @@
 /**
  * @file SpaceDefender.cpp
- * @author your name (you@domain.com)
- * @brief 
- * @version 0.1
+ * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
+ * @author Gabriel Anton Norheim ()
+ * @brief The cpp file for the SpaceDefender class
+ * @version 1.0
  * @date 2025-04-01
  * 
  * @copyright Copyright (c) 2025
@@ -10,17 +11,18 @@
  */
 
 #include "SpaceDefender.h"
-
 #include <iostream>
 
 
 /**
- * @brief Construct a new Space Defender:: Space Defender object
+ * @brief Construct a new SpaceDefender::SpaceDefender object
  * 
- * @param position 
- * @param width 
- * @param height 
- * @param title 
+ * @param position Position of where the window starts in upper left corner
+ * @param width The width of the window
+ * @param height The height of the window
+ * @param title The title of the window
+ * @param numEnemiesHeight The number of enemies in the height of the window
+ * @param numEnemiesWidth The number of enemies in the width of the window
  */
 SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, const std::string& title): 
     AnimationWindow(position.x, position.y, width, height, title),
@@ -56,8 +58,8 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     GoToMenuBtn.setCallback(std::bind(&SpaceDefender::cb_menu, this));
 
     // Add enemies to enemyShips vector
-    int numEnemiesHeight = 5;
-    int numEnemiesWidth = 10;
+    int numEnemiesHeight = 5; /** @todo Fix how enemies spawn */
+    int numEnemiesWidth = 10; /** @todo Need dynamic */
     int spacing = width / (numEnemiesWidth + 1);
     for (int j = 0;j < numEnemiesHeight;++j) {
         for (int i = 0; i < numEnemiesWidth; ++i) {
@@ -66,20 +68,23 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     }
 }
 
-// Set the current screen
+/**
+ * @brief Set the current screen. 
+ * 
+ *  Replaces the current screen with std::move(newScreen) of the unique_ptr<Screen>
+ * @param newScreen The new screen that we want to point to
+ * @param currentScreen The current screen that the pointer points to
+ */
 void SpaceDefender::setScreen(std::unique_ptr<Screen> newScreen) {
     currentScreen = std::move(newScreen);
 }
 
-// Callbacks
-void SpaceDefender::cb_endGame()        {close();}
-void SpaceDefender::cb_startGame()      {setScreen(std::make_unique<ScreenGame>());}
-void SpaceDefender::cb_showHighscores() {setScreen(std::make_unique<ScreenHighscore>());}
-void SpaceDefender::cb_settings()       {setScreen(std::make_unique<ScreenSettings>());}
-void SpaceDefender::cb_menu()           {setScreen(std::make_unique<ScreenMenu>()); }
-
-
-// Game loop
+/**
+ * @brief Game loop that runs the game until the window is closed
+ * 
+ * Updates the game state and draws the current screen
+ * @param currentScreen Draws the current screen as long as its not a null pointer
+ */
 void SpaceDefender::run() {
     while (!should_close()) {
         next_frame();

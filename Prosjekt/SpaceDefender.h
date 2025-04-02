@@ -1,3 +1,13 @@
+/**
+ * @file SpaceDefender.h
+ * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
+ * @brief The header file for the SpaceDefender class
+ * @version 1.0
+ * @date 2025-04-01
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #pragma once
 
 #include "AnimationWindow.h"
@@ -7,21 +17,29 @@
 #include "SpaceShip.h"
 #include "Weapon.h"
 
-
+/**
+ * @class SpaceDefender
+ * @brief The main game class which runs the game. Uses AnimationWindow as base class
+ * @param currentScreen Pointer to the current screen
+ * @param btnWidth Width of the buttons. Relative to window width
+ * @param btnHeight Height of the buttons. Relative to window height
+ * @param playerShip PlayerShip object
+ * @param enemyShips Vector of EnemyShip objects
+ * @param firedWeapons Vector of Weapon objects
+ * 
+ */
 class SpaceDefender : public TDT4102::AnimationWindow {
 private:
 	std::unique_ptr<Screen> currentScreen;
-
-    // Define button width and height based on screen size
     unsigned int btnWidth;
     unsigned int btnHeight;
 
     // Callback functions for buttons
-    void cb_startGame();
-    void cb_showHighscores();
-	void cb_settings();
-	void cb_endGame();
-	void cb_menu();
+    void cb_endGame()        {close();} /**< Close the game callback function */
+    void cb_startGame()      {setScreen(std::make_unique<ScreenGame>());} /**< Start the game callback function */
+    void cb_showHighscores() {setScreen(std::make_unique<ScreenHighscore>());} /**< Show the highscores callback function */
+    void cb_settings()       {setScreen(std::make_unique<ScreenSettings>());} /**< Show the settings callback function */
+    void cb_menu()           {setScreen(std::make_unique<ScreenMenu>()); } /**< Show the menu callback function */
 
 public:
     SpaceDefender(TDT4102::Point position = {100, 100}, int width = 600, int height = 800, const std::string& title = "Space Defender");
@@ -40,5 +58,5 @@ public:
     std::vector<SpaceShipEnemy> enemyShips;
 
     // Weapons
-    std::vector<std::unique_ptr<Weapon>> firedWeapons;
+    std::vector<std::unique_ptr<Weapon>> firedWeapons; /** @todo Will the weapons be deleted? Since we are putting bullet in there?*/
 };
