@@ -11,6 +11,10 @@
  */
 #include "std_lib_facilities.h"
 #include "SpaceDefender.h"
+#include <iostream>
+#include <fstream>
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 /**
  * @fn int main()
@@ -18,10 +22,10 @@
  * @param game SpaceDefender object
  * @return Returns 0 on success 
  */
-int main() {
+int main() {    
     // Create SpaceDefender window and initialize with MenuScreen
     SpaceDefender game{};
-    game.setScreen(std::make_unique<ScreenMenu>());
+    game.setScreen(std::make_unique<ScreenHighscore>());
     game.run();
     return 0;
 }
