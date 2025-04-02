@@ -11,6 +11,8 @@ public:
     int getDamage() {return damage;}
     virtual void move() {yProjectile -=speed;}
     virtual void draw(SpaceDefender& window) = 0;
+    int getPositionX() const {return xProjectile;};
+    int getPositionY() const {return yProjectile;};
 
 protected:
     int speed;

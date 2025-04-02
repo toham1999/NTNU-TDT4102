@@ -2,7 +2,6 @@
 #include "SpaceDefender.h"
 #include <iostream>
 
-
 // ---- Bullet ----
 void Bullet::fireWeapon(SpaceDefender& window) {
     xProjectile = window.playerShip.getPositionX();

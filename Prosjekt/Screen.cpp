@@ -13,7 +13,7 @@ void ScreenMenu::draw(SpaceDefender& window) {
 }
 
 
-// ---- ScreenGame ----
+// ---- ScreenGame ---
 void ScreenGame::draw(SpaceDefender& window) {
     for (SpaceShipEnemy enemyShip : window.enemyShips) {
         //window.draw_circle({enemyShip.getPositionX(),enemyShip.getPositionY()},10,TDT4102::Color::antique_white);
@@ -32,8 +32,32 @@ void ScreenGame::draw(SpaceDefender& window) {
 
     // Update and draw fired weapons
     for (auto& weaponPtr : window.firedWeapons) {
+        // Check if the weapon is out of the screen, stops memory leakage
+        if (weaponPtr->getPositionY() < 0) {
+            window.firedWeapons.erase(std::remove(window.firedWeapons.begin(), window.firedWeapons.end(), weaponPtr), window.firedWeapons.end());
+        }
+        if (weaponPtr->getPositionY() > window.height()) {
+            weaponPtr -> ~Weapon();
+        }
         weaponPtr->move();
         weaponPtr->draw(window);
+        
+        // Check if the weapon hit the enemy ship
+        
+        for (SpaceShipEnemy& enemyShip : window.enemyShips) {
+            if (weaponPtr->getPositionX() >= enemyShip.getPositionX() &&
+                weaponPtr->getPositionX() <= enemyShip.getPositionX() + enemyShip.getShipWidth() &&
+                weaponPtr->getPositionY() >= enemyShip.getPositionY() &&
+                weaponPtr->getPositionY() <= enemyShip.getPositionY() + enemyShip.getShipHeight()) {
+                //window.firedWeapons.erase(window.firedWeapons.begin());
+
+                enemyShip.healthReduction(weaponPtr->getDamage());
+                weaponPtr -> ~Weapon();
+                if (enemyShip.getHealth() <= 0) {
+                    enemyShip.~SpaceShipEnemy();
+                }
+            } 
+        }
     }
 
     // Update spaceship movements and shooting

@@ -11,7 +11,7 @@ public:
 
     virtual void movements(SpaceDefender& window) = 0;
     virtual void shooting(SpaceDefender& window) = 0;
-    void healthReduction() { --health; }
+    void healthReduction(int damage) { health -= damage; }
     int getHealth() const {return health;}
     int getPositionX() const {return x;}
     int getPositionY() const {return y;}
@@ -51,4 +51,5 @@ class SpaceShipEnemy : public SpaceShip {
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image alienImage;
+        ~SpaceShipEnemy() = default;
 };
