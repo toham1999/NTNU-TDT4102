@@ -30,7 +30,7 @@ public:
     int getDamage() {return damage;} /**< Getter for damage */
     virtual void move() {yProjectile -=speed;} /**< Move the projectile in y-axis */
     virtual void draw(SpaceDefender& window) = 0; /**< Pure virtual function. Is supposed to draw the projectile */
-    int getPositionX() const {return xProjectile;};
+    int getPositionX() const {return  xProjectile;};
     int getPositionY() const {return yProjectile;};
     virtual int getRadius() = 0; //**< Pure virtual function. Is supposed to get the radius of the projectile */
 protected:
