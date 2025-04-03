@@ -25,7 +25,7 @@ using json = nlohmann::json;
 int main() {    
     // Create SpaceDefender window and initialize with MenuScreen
     SpaceDefender game{};
-    game.setScreen(std::make_unique<ScreenHighscore>());
+    game.setScreen(std::make_unique<ScreenGame>());
     game.run();
     return 0;
 }
