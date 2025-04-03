@@ -42,7 +42,7 @@ private:
     void cb_menu()           {setScreen(std::make_unique<ScreenMenu>()); } /**< Show the menu callback function */
 
 public:
-    SpaceDefender(TDT4102::Point position = {100, 100}, int width = 600, int height = 800, const std::string& title = "Space Defender");
+    SpaceDefender(TDT4102::Point position = {100, 50}, int width = 600, int height = 700, const std::string& title = "Space Defender");
     void setScreen(std::unique_ptr<Screen> newScreen);
     void run();
 

@@ -34,14 +34,16 @@ void SpaceShipPlayer::movements(SpaceDefender& window) {
  * Fires a bullet, fire the  and stores it in a vector
  * @param window SpaceDefender object
  * @param newBullet Creates a new Bullet
+ * @param new The time at the point when the function is called
  * @todo Only bullets are fired, consider making it more general. For example having a set weapon type
- * @todo Add weapon delay
  */
 void SpaceShipPlayer::shooting(SpaceDefender& window) {
-    if (window.is_key_down(KeyboardKey::SPACE)) {
+    auto now = std::chrono::steady_clock::now();
+    if (window.is_key_down(KeyboardKey::SPACE) && std::chrono::duration_cast<std::chrono::milliseconds>(now - lastShotTime) >= fireRate) {
         std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>(5, 1);  // Create the bullet
         newBullet->fireWeapon(window);  // Call the fireWeapon method to set the position
         window.firedWeapons.emplace_back(std::move(newBullet));  // Store the bullet
+        lastShotTime = now;
     }
 }
 // hei tor
@@ -63,6 +65,9 @@ void SpaceShipEnemy::movements(SpaceDefender& window) {
  * A random enenmy fires a bullet and stores it in a vector
  * @param window SpaceDefender object
  * @todo Fix shooting of the enemy
+ * @todo Method to find lowest ship in each column
+ * @todo One of said ships fire randomly
+ * @todo Firerate approximatly same as playership
  */
 void SpaceShipEnemy::shooting(SpaceDefender& window) {
     (void)window;
