@@ -80,6 +80,11 @@ void ScreenMenu::draw(SpaceDefender& window) {
  * @brief Draws the screencontent of the Game
  * 
  * Draws and updates, enemie ships, the player ship and fired weapons. 
+ * Itrerates through all the fired weapons and checks for collisions when iterating through all the enemy ships
+ * It is an iterator for the fired weapons and itEnemy is an iterator for the enemy ships that is an unique pointer to the enemy ship object
+ * if they collide the iterator unique pointer is deleated and the object is then deleated automatically from the vector
+ * to move along in the loop we must update the iterator either by deleating it or incrementing it
+ * draws every object in window, player ship, enemie ships and fired weapons are deleated from window if hit and helth <= 0
  * @param window SpaceDefender object
  */
 void ScreenGame::draw(SpaceDefender& window)
@@ -102,14 +107,14 @@ void ScreenGame::draw(SpaceDefender& window)
     {  
         bool killShip = false;
         for(auto itEnemy = window.enemyShips.begin(); itEnemy != window.enemyShips.end();)
-        {
+        {   
             bool checksXPossision = ((*itEnemy)->getPositionX()-(*itEnemy)->getShipWidth() <=(*it)->getPositionX() + (*it)->getRadius() && (*it)->getPositionX() - (*it)->getRadius() <= (*itEnemy)->getPositionX() + (*itEnemy)->getShipWidth());
             bool checksYPossision = ((*it)->getPositionY() <= (*itEnemy)->getPositionY() + (*itEnemy)->getShipHeight() && (*itEnemy)->getPositionY() <= (*it)->getPositionY());
             if(checksXPossision&&checksYPossision)
             {
                 (*itEnemy)->healthReduction((*it)->getDamage());
                 if ((*itEnemy)->getHealth() <= 0) {
-                    itEnemy = window.enemyShips.erase(itEnemy);
+                    itEnemy = window.enemyShips.erase(itEnemy); //* @todo update Gamescore*/
                 }
                 killShip = true;
             }
@@ -118,10 +123,25 @@ void ScreenGame::draw(SpaceDefender& window)
             }
             
         }
-        
+        /*
+        SpaceShipPlayer player = window.playerShip;
+        bool checksXPossision = (player.getPositionX()-player.getShipWidth() <=(*it)->getPositionX() + (*it)->getRadius() && (*it)->getPositionX() - (*it)->getRadius() <= player.getPositionX() + player.getShipWidth());
+        bool checksYPossision = (player.getPositionY()+player.getShipHeight() < (*it)->getPositionY()-(*it)->getRadius());
+        if (checksXPossision&&checksYPossision)
+        {
+            //player.healthReduction((*it)->getDamage());
+            player.setShipSpeed(--1);
+            killShip = true;
+            if (player.getHealth() <= 0) {
+                 // fixes to Game over 
+                break;
+            }
+        }
+        */
+        //* @todo update hitconditions and make GameOver screen with score*/
         // Check if the weapon is out of the screen, stops memory leakage WORKS!!!
         
-        if ((*it)->getPositionY() < 100 || killShip)
+        if ((*it)->getPositionY() < 10 || killShip || (*it)->getPositionY() > window.height())
         {
             it = window.firedWeapons.erase(it);
         }
