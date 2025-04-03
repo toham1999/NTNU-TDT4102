@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-
+class SpaceShip;
 class SpaceDefender;  // Forward declaration of SpaceDefender to avoid circular dependency
 
 /**
@@ -25,13 +25,14 @@ class Weapon {
 public:
     Weapon(int speed, int damage) : speed(speed), damage(damage) {} /**< Constructor that initializes speed and damage */
     virtual ~Weapon() = default; /**< Virtual destructor to ensure proper cleanup*/ 
-    virtual void fireWeapon(SpaceDefender& window) = 0; /**< Pure virtual function. Is supposed to fire the projectile, aka get the postion when fired. */
+    virtual void fireWeapon(SpaceShip& shooter) = 0; /**< Pure virtual function. Is supposed to fire the projectile, aka get the postion when fired. */
     int getSpeed() {return speed;} /**< Getter for speed */
     int getDamage() {return damage;} /**< Getter for damage */
     virtual void move() {yProjectile -=speed;} /**< Move the projectile in y-axis */
     virtual void draw(SpaceDefender& window) = 0; /**< Pure virtual function. Is supposed to draw the projectile */
     int getPositionX() const {return xProjectile;};
     int getPositionY() const {return yProjectile;};
+    void setWeaponSpeed(int newSpeed) {speed = newSpeed;}; /**< Setter for speed */
 
 protected:
     int speed;
@@ -48,7 +49,7 @@ protected:
 class Bullet : public Weapon {
 public:
     Bullet(int speed, int damage) : Weapon(speed, damage) {}
-    void fireWeapon(SpaceDefender& window) override;
+    void fireWeapon(SpaceShip& shooter) override;
     void draw(SpaceDefender& window) override;
 private:
     int radius = 5;
@@ -62,7 +63,7 @@ private:
 class Bomb : public Weapon {
 public:
     Bomb(int speed, int damage) : Weapon(speed, damage) {}
-    void fireWeapon(SpaceDefender& window) override;
+    void fireWeapon(SpaceShip& shooter) override;
 };
 
 /**
@@ -73,5 +74,5 @@ public:
 class Laser : public Weapon {
 public:
     Laser(int speed, int damage) : Weapon(speed, damage) {}
-    void fireWeapon(SpaceDefender& window) override;
+    void fireWeapon(SpaceShip& shooter) override;
 };

@@ -10,6 +10,7 @@
  */
 #include "Weapon.h"
 #include "SpaceDefender.h" 
+#include "SpaceShip.h"
 
 
 /**
@@ -21,9 +22,12 @@
  * @param xProjectile Position of the projectile in the x-axis
  * @param yProjectile Position of the projectile in the y-axis
  */
-void Bullet::fireWeapon(SpaceDefender& window) {
-    xProjectile = window.playerShip.getPositionX();
-    yProjectile = window.playerShip.getPositionY();
+void Bullet::fireWeapon(SpaceShip& shooter) {
+    xProjectile = shooter.getPositionX();
+    yProjectile = shooter.getPositionY();
+    if (dynamic_cast<const SpaceShipEnemy*>(&shooter)) {
+        setWeaponSpeed(-2);
+    }
 }
 
 /**
@@ -41,18 +45,18 @@ void Bullet::draw(SpaceDefender& window) {
 /**
  * @brief 
  * @todo Add this function
- * @param window 
+ * @param shooter 
  */
-void Bomb::fireWeapon(SpaceDefender& window) {
-    (void)window;
+void Bomb::fireWeapon(SpaceShip& shooter) {
+    (void)shooter;
 }
 
 
 /**
  * @brief 
  * @todo Add this function
- * @param window 
+ * @param shooter 
  */
-void Laser::fireWeapon(SpaceDefender& window) {
-    (void)window;
+void Laser::fireWeapon(SpaceShip& shooter) {
+    (void)shooter;
 }
