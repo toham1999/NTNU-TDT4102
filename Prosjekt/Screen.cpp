@@ -78,6 +78,8 @@ void ScreenGame::draw(SpaceDefender& window) {
                 if((itEnemy.getPositionX()<=(*it)->getPositionX() && (*it)->getPositionX()<= itEnemy.getPositionX() + itEnemy.getShipWidth()) &&
                 ((*it)->getPositionY() <= (itEnemy).getPositionY() + (itEnemy).getShipHeight()))
                 {
+                    window.firedWeapons.erase(it);
+                    break;
                     //window.enemyShips.erase(window.enemyShips.at(i));
 
                     /*window.enemyShips.erase(std::remove_if(window.enemyShips.begin(), window.enemyShips.end(), [](SpaceShipEnemy& enemyShip) 
@@ -99,8 +101,6 @@ void ScreenGame::draw(SpaceDefender& window) {
                     //break;
                 }
             } 
-            auto a = window.enemyShips.begin();
-            std::cout << window.firedWeapons.begin() << std::endl;
             //window.firedWeapons.erase();
             
             // Check if the weapon is out of the screen, stops memory leakage WORKS!!!
