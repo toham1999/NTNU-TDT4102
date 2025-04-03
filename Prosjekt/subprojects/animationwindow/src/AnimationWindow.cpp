@@ -274,7 +274,7 @@ void TDT4102::AnimationWindow::draw_line(TDT4102::Point start, TDT4102::Point en
 }
 
 void TDT4102::AnimationWindow::draw_triangle(TDT4102::Point vertex0, TDT4102::Point vertex1,
-                                            TDT4102::Point vertex2, TDT4102::Color color) {
+                                             TDT4102::Point vertex2, TDT4102::Color color) {
     SDL_Vertex v0{{float(vertex0.x), float(vertex0.y)}, {color.redChannel, color.greenChannel, color.blueChannel, color.alphaChannel}, {0, 0}};
     SDL_Vertex v1{{float(vertex1.x), float(vertex1.y)}, {color.redChannel, color.greenChannel, color.blueChannel, color.alphaChannel}, {0, 0}};
     SDL_Vertex v2{{float(vertex2.x), float(vertex2.y)}, {color.redChannel, color.greenChannel, color.blueChannel, color.alphaChannel}, {0, 0}};
@@ -284,7 +284,7 @@ void TDT4102::AnimationWindow::draw_triangle(TDT4102::Point vertex0, TDT4102::Po
 }
 
 void TDT4102::AnimationWindow::draw_quad(TDT4102::Point vertex0, TDT4102::Point vertex1, TDT4102::Point vertex2,
-                                        TDT4102::Point vertex3, TDT4102::Color color) {
+                                         TDT4102::Point vertex3, TDT4102::Color color) {
     SDL_Vertex v0{{float(vertex0.x), float(vertex0.y)}, {color.redChannel, color.greenChannel, color.blueChannel, color.alphaChannel}, {0, 0}};
     SDL_Vertex v1{{float(vertex1.x), float(vertex1.y)}, {color.redChannel, color.greenChannel, color.blueChannel, color.alphaChannel}, {0, 0}};
     SDL_Vertex v2{{float(vertex2.x), float(vertex2.y)}, {color.redChannel, color.greenChannel, color.blueChannel, color.alphaChannel}, {0, 0}};

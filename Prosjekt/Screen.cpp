@@ -7,7 +7,8 @@
  * 
  * @copyright Copyright (c) 2025
  * 
- */
+*/
+#include <std_lib_facilities.h>
 #include "Screen.h"
 #include "SpaceDefender.h"
 #include <iostream>
@@ -15,8 +16,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include "nlohmann/json.hpp" 
-using json = nlohmann::json;
+//#include "nlohmann/json.hpp" 
+//using json = nlohmann::json;
 
 /**
  * @brief Reads the highscores from a json file
@@ -24,6 +25,7 @@ using json = nlohmann::json;
  * @param filename The name of the json file to be read
  * @return std::vector<Player> 
  */
+/*
 std::vector<Player> readScores(const std::string& filename) {
     std::vector<Player> players;
     std::ifstream file(filename);
@@ -39,7 +41,7 @@ std::vector<Player> readScores(const std::string& filename) {
     }
     return players;
 }
-
+*/
 /**
  * @brief Function to format the text that is drawn for each highscore
  * 
@@ -80,10 +82,11 @@ void ScreenMenu::draw(SpaceDefender& window) {
  * Draws and updates, enemie ships, the player ship and fired weapons. 
  * @param window SpaceDefender object
  */
-void ScreenGame::draw(SpaceDefender& window) {
-    for (SpaceShipEnemy enemyShip : window.enemyShips) {
+void ScreenGame::draw(SpaceDefender& window)
+{
+    for (auto ptr = window.enemyShips.begin(); ptr != window.enemyShips.end(); ++ptr) {
         //window.draw_circle({enemyShip.getPositionX(),enemyShip.getPositionY()},10,TDT4102::Color::antique_white);
-        window.draw_image({enemyShip.getPositionX(),enemyShip.getPositionY()}, enemyShip.alienImage, enemyShip.getShipWidth(),enemyShip.getShipHeight());
+        window.draw_image({(*ptr)->getPositionX(),(*ptr)->getPositionY()}, (*ptr)->alienImage, (*ptr)->getShipWidth(),(*ptr)->getShipHeight());
     }
     window.draw_image({window.playerShip.getPositionX(),window.playerShip.getPositionY()}, window.playerShip.playerImage, window.playerShip.getShipWidth(), window.playerShip.getShipHeight());
 
@@ -95,113 +98,49 @@ void ScreenGame::draw(SpaceDefender& window) {
     window.GoToMenuBtn.setVisible(true);
 
     // Update and draw fired weapons
-/*
-    for (auto& weaponPtr : window.firedWeapons) {
-        // Check if the weapon is out of the screen, stops memory leakage
-        if (weaponPtr->getPositionY() < 0) {
-            window.firedWeapons.pop_back();
-        }
-        if (weaponPtr->getPositionY() > window.height()) {
-            weaponPtr -> ~Weapon();
-            weaponPtr = nullptr;
-            break;
-        }
-    
-        weaponPtr->move();
-        weaponPtr->draw(window);
-        
-        // Check if the weapon hit the enemy ship
-        
-        for (SpaceShipEnemy& enemyShip : window.enemyShips) {
-            if (weaponPtr->getPositionX() >= enemyShip.getPositionX() ||
-                weaponPtr->getPositionX() <= enemyShip.getPositionX() + enemyShip.getShipWidth() ||
-                weaponPtr->getPositionY() >= enemyShip.getPositionY() ||
-                weaponPtr->getPositionY() <= enemyShip.getPositionY() + enemyShip.getShipHeight()) {
-                //window.firedWeapons.erase(window.firedWeapons.begin());
-
-                enemyShip.healthReduction(weaponPtr->getDamage());
-                window.firedWeapons.erase(std::remove(window.firedWeapons.begin(), window.firedWeapons.end(), weaponPtr), window.firedWeapons.end());
-                if (enemyShip.getHealth() <= 0) {
-                    //window.enemyShips.erase(std::remove(window.enemyShips.begin(), window.enemyShips.end(), enemyShip), window.enemyShips.end());
-                    //enemyShip.~aceShipEnemy();
-                    window.enemyShips.pop_back();
-                }
-            } 
-        }
-    }
-    */
-    // itereator versionSp
-    if(!window.firedWeapons.empty()){
-        std::vector<std::unique_ptr<Weapon>> firedWeaponsCopy;
-        
-        for(auto it = window.firedWeapons.begin(); it != window.firedWeapons.end();)
-        {  
-            for(int i = 0; i < window.enemyShips.size(); i++)
+    for(auto it = window.firedWeapons.begin(); it != window.firedWeapons.end();)
+    {  
+        bool killShip = false;
+        for(auto itEnemy = window.enemyShips.begin(); itEnemy != window.enemyShips.end();)
+        {
+            bool checksXPossision = ((*itEnemy)->getPositionX()-(*itEnemy)->getShipWidth() <=(*it)->getPositionX() + (*it)->getRadius() && (*it)->getPositionX() - (*it)->getRadius() <= (*itEnemy)->getPositionX() + (*itEnemy)->getShipWidth());
+            bool checksYPossision = ((*it)->getPositionY() <= (*itEnemy)->getPositionY() + (*itEnemy)->getShipHeight() && (*itEnemy)->getPositionY() <= (*it)->getPositionY());
+            if(checksXPossision&&checksYPossision)
             {
-                auto itEnemy = window.enemyShips.at(i);
-                bool checksXPossision = (itEnemy.getPositionX()<=(*it)->getPositionX() && (*it)->getPositionX()<= itEnemy.getPositionX() + itEnemy.getShipWidth());
-                bool checksYPossision = ((*it)->getPositionY() <= itEnemy.getPositionY() + itEnemy.getShipHeight());
-                if(checksXPossision&&checksYPossision)
-                {
-                    
-                    //window.enemyShips.erase(window.enemyShips.at(i));
-
-                    /*window.enemyShips.erase(std::remove_if(window.enemyShips.begin(), window.enemyShips.end(), [](SpaceShipEnemy& enemyShip) 
-                    {
-                        return ((itEnemy->getPositionX()<=(*it)->getPositionX() && (*it)->getPositionX()<= (itEnemy)->getPositionX() + (itEnemy)->getShipWidth()) &&
-                        ((*it)->getPositionY() <= (itEnemy)->getPositionY() + (itEnemy)->getShipHeight()));}
-                    ))
-                    */
-                    /*
-                    (itEnemy)->healthReduction((*it)->getDamage());
-                    it = window.firedWeapons.erase(it);
-                    if ((itEnemy)->getHealth() <= 0) {
-                        window.enemyShips.erase(itEnemy);
-                        
-                        } */
+                (*itEnemy)->healthReduction((*it)->getDamage());
+                if ((*itEnemy)->getHealth() <= 0) {
+                    itEnemy = window.enemyShips.erase(itEnemy);
                 }
-                else{
-                    //itEnemy++;
-                    //break;
-                }
-            } 
-            //window.firedWeapons.erase();
-            
-            // Check if the weapon is out of the screen, stops memory leakage WORKS!!!
-        
-            if ((*it)->getPositionY() < 100)
-            {
-                it = window.firedWeapons.erase(it);
+                killShip = true;
             }
             else{
-                (*it)->move();
-                (*it)->draw(window);
-                it++;
+                itEnemy++;
             }
             
+        }
         
-            /*
-            if (((itEnemy)->getPositionX()>=(*it)->getPositionX()<= (itEnemy)->getPositionX() + (itEnemy)->getShipWidth())&&
-                ((*it)->getPositionY() <= (itEnemy)->getPositionY() + (itEnemy)->getShipHeight()) )
-            for(auto itEnemy = window.enemyShips.begin(); itEnemy != window.enemyShips.end(); itEnemy++){
-                if (((itEnemy)->getPositionX()>=(*it)->getPositionX()<= (itEnemy)->getPositionX() + (itEnemy)->getShipWidth())&&
-                ((*it)->getPositionY() <= (itEnemy)->getPositionY() + (itEnemy)->getShipHeight()) ){
-                    (*itEnemy).healthReduction((*it)->getDamage());
-                    window.firedWeapons.erase(it);
-                    if ((*itEnemy).getHealth() <= 0) {
-                        window.enemyShips.erase(itEnemy);
-                    }
-        }}
-            */
-
+        // Check if the weapon is out of the screen, stops memory leakage WORKS!!!
         
+        if ((*it)->getPositionY() < 100 || killShip)
+        {
+            it = window.firedWeapons.erase(it);
+        }
+        else if (killShip){
+            break;
+        }
+        else if(!killShip){
+            (*it)->move();
+            (*it)->draw(window);
+            it++;
         }
     }
+    
     
     
     // Update spaceship movements and shooting
     window.playerShip.movements(window);
     window.playerShip.shooting(window);
+    
 }
 
 /**
@@ -217,7 +156,7 @@ void ScreenHighscore::draw(SpaceDefender& window) {
     window.draw_text({window.width()/2 - window.width()/4, window.height()/20}, "TOP 10 SCORES", TDT4102::Color::aqua,  35);
     // Headline row
     window.draw_text({150, 120}, "Rank  Name - Score  Round", TDT4102::Color::dark_red, 30);
-
+/*
     std::vector<Player> players = readScores("highscores.json");
 
     int yOffset = 150;
@@ -226,7 +165,7 @@ void ScreenHighscore::draw(SpaceDefender& window) {
         window.draw_text({150, yOffset}, text, TDT4102::Color::white, 25);
         yOffset += 30;
     }
-
+*/
     window.StartGameBtn.setVisible(false);
     window.HighscoresBtn.setVisible(false);
     window.SettingsBtn.setVisible(false);

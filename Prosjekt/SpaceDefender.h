@@ -55,7 +55,7 @@ public:
 
 	// Spaceships 
 	SpaceShipPlayer playerShip;
-    std::vector<SpaceShipEnemy> enemyShips;
+    std::vector<std::unique_ptr<SpaceShipEnemy>> enemyShips; //canged to unique
 
     // Weapons
     std::vector<std::unique_ptr<Weapon>> firedWeapons; /** @todo Will the weapons be deleted? Since we are putting bullet in there?*/

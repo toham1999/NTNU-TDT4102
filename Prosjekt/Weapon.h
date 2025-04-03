@@ -32,7 +32,7 @@ public:
     virtual void draw(SpaceDefender& window) = 0; /**< Pure virtual function. Is supposed to draw the projectile */
     int getPositionX() const {return xProjectile;};
     int getPositionY() const {return yProjectile;};
-
+    virtual int getRadius() = 0; //**< Pure virtual function. Is supposed to get the radius of the projectile */
 protected:
     int speed;
     int damage;
@@ -50,6 +50,7 @@ public:
     Bullet(int speed, int damage) : Weapon(speed, damage) {}
     void fireWeapon(SpaceDefender& window) override;
     void draw(SpaceDefender& window) override;
+    int getRadius() {return radius;} //**< Getter for radius */
 private:
     int radius = 5;
 };

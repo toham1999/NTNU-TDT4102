@@ -63,7 +63,7 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     int spacing = width / (numEnemiesWidth + 1);
     for (int j = 0;j < numEnemiesHeight;++j) {
         for (int i = 0; i < numEnemiesWidth; ++i) {
-            enemyShips.emplace_back(spacing * (i + 1), spacing * (j + 1));
+            enemyShips.emplace_back(std::make_unique<SpaceShipEnemy>(SpaceShipEnemy(spacing * (i + 1), spacing * (j + 1))));
         }
     }
 }
