@@ -11,10 +11,11 @@
 #include "Screen.h"
 #include "SpaceDefender.h"
 #include <iostream>
+#include <vector>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include <nlohmann/json.hpp>
+#include "nlohmann/json.hpp" 
 using json = nlohmann::json;
 
 /**
@@ -122,14 +123,14 @@ void ScreenGame::draw(SpaceDefender& window) {
                 window.firedWeapons.erase(std::remove(window.firedWeapons.begin(), window.firedWeapons.end(), weaponPtr), window.firedWeapons.end());
                 if (enemyShip.getHealth() <= 0) {
                     //window.enemyShips.erase(std::remove(window.enemyShips.begin(), window.enemyShips.end(), enemyShip), window.enemyShips.end());
-                    //enemyShip.~SpaceShipEnemy();
+                    //enemyShip.~aceShipEnemy();
                     window.enemyShips.pop_back();
                 }
             } 
         }
     }
     */
-    // itereator version
+    // itereator versionSp
     if(!window.firedWeapons.empty()){
         std::vector<std::unique_ptr<Weapon>> firedWeaponsCopy;
         
@@ -138,11 +139,11 @@ void ScreenGame::draw(SpaceDefender& window) {
             for(int i = 0; i < window.enemyShips.size(); i++)
             {
                 auto itEnemy = window.enemyShips.at(i);
-                if((itEnemy.getPositionX()<=(*it)->getPositionX() && (*it)->getPositionX()<= itEnemy.getPositionX() + itEnemy.getShipWidth()) &&
-                ((*it)->getPositionY() <= (itEnemy).getPositionY() + (itEnemy).getShipHeight()))
+                bool checksXPossision = (itEnemy.getPositionX()<=(*it)->getPositionX() && (*it)->getPositionX()<= itEnemy.getPositionX() + itEnemy.getShipWidth());
+                bool checksYPossision = ((*it)->getPositionY() <= itEnemy.getPositionY() + itEnemy.getShipHeight());
+                if(checksXPossision&&checksYPossision)
                 {
-                    window.firedWeapons.erase(it);
-                    break;
+                    
                     //window.enemyShips.erase(window.enemyShips.at(i));
 
                     /*window.enemyShips.erase(std::remove_if(window.enemyShips.begin(), window.enemyShips.end(), [](SpaceShipEnemy& enemyShip) 
