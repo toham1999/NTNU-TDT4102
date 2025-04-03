@@ -127,11 +127,11 @@ void SpaceDefender::findShipToKill() {
     std::unordered_map<int, SpaceShipEnemy*> lowestShipsMap;
 
     for (auto & enemyShip : enemyShips) {
-        const int posX = enemyShip.getPositionX();
-        const int posY = enemyShip.getPositionY();
+        const int posX = enemyShip->getPositionX();
+        const int posY = enemyShip->getPositionY();
 
-        if (lowestShipsMap.find(posX) == lowestShipsMap.end() || enemyShip.getPositionY() > lowestShipsMap[posX]->getPositionY()) {
-            lowestShipsMap[posX] = &enemyShip;
+        if (lowestShipsMap.find(posX) == lowestShipsMap.end() || enemyShip->getPositionY() > lowestShipsMap[posX]->getPositionY()) {
+            lowestShipsMap[posX] = &*enemyShip;
         }
     }
     std::vector<SpaceShipEnemy*> lowestShips;

@@ -27,6 +27,7 @@ void Bullet::fireWeapon(SpaceShip& shooter) {
     yProjectile = shooter.getPositionY();
     if (dynamic_cast<const SpaceShipEnemy*>(&shooter)) {
         setWeaponSpeed(-2);
+        yProjectile += shooter.getShipHeight()+1;
     }
 }
 
