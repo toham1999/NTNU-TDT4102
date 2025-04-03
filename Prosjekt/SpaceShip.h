@@ -9,7 +9,7 @@
  * 
  */
 #pragma once
-
+#include <chrono>
 #include "subprojects/animationwindow/include/Image.h" //for image type
 
 class SpaceDefender;  // Forward declaration of SpaceDefender to avoid circular dependency
@@ -59,6 +59,9 @@ protected:
  * @brief Class for player ship
  * @class SpaceShipPlayer
  * @param playerImage Image of the playership
+ * @param lastShotTime The time of the last 
+ * @param fireRate How often the weapon can be fired
+ * @todo firerate in regards to different weapomn types
  */
 class SpaceShipPlayer : public SpaceShip {
     public:
@@ -70,6 +73,9 @@ class SpaceShipPlayer : public SpaceShip {
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image playerImage;
+    private:
+        std::chrono::steady_clock::time_point lastShotTime;
+        const std::chrono::milliseconds fireRate = std::chrono::milliseconds(500);
 }; 
 
 
@@ -86,4 +92,4 @@ class SpaceShipEnemy : public SpaceShip {
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image alienImage;
-};
+    };
