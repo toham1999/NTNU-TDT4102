@@ -33,7 +33,7 @@ public:
     int getPositionX() const {return xProjectile;};
     int getPositionY() const {return yProjectile;};
     void setWeaponSpeed(int newSpeed) {speed = newSpeed;}; /**< Setter for speed */
-
+    virtual int getRadius() = 0; //**< Pure virtual function. Is supposed to get the radius of the projectile */
 protected:
     int speed;
     int damage;
@@ -51,6 +51,7 @@ public:
     Bullet(int speed, int damage) : Weapon(speed, damage) {}
     void fireWeapon(SpaceShip& shooter) override;
     void draw(SpaceDefender& window) override;
+    int getRadius() {return radius;} //**< Getter for radius */
 private:
     int radius = 5;
 };

@@ -64,7 +64,7 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
     int spacing = width / (numEnemiesWidth + 1);
     for (int j = 0;j < numEnemiesHeight;++j) {
         for (int i = 0; i < numEnemiesWidth; ++i) {
-            enemyShips.emplace_back(spacing * (i + 1), spacing * (j + 1));
+            enemyShips.emplace_back(std::make_unique<SpaceShipEnemy>(SpaceShipEnemy(spacing * (i + 1), spacing * (j + 1))));
         }
     }
 }
@@ -79,6 +79,27 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
 void SpaceDefender::setScreen(std::unique_ptr<Screen> newScreen) {
     currentScreen = std::move(newScreen);
 }
+/**
+ * @brief takes in a pointer to an enemy ship and a pointer to a weapon and checks if they have collided
+ * 
+ * the unique pointer should be deleated if they have collided
+ * @param itEnemy the pointer to the enemy ship
+ * @param it the pointer to the weapon class often a bullet
+ * @return true if they have collided
+ * @return false if not
+ * @todo make the fuction general and happen, ok with takeing in unique pointer adresses
+ */
+bool SpaceDefender::checkCollision(std::unique_ptr<SpaceShipEnemy>& itEnemy, std::unique_ptr<Weapon>& it) {
+    
+    return false;
+}
+
+
+
+
+
+
+
 
 /**
  * @brief Game loop that runs the game until the window is closed

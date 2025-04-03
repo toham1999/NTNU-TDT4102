@@ -28,7 +28,7 @@ struct Player {
     int round;
 };
 
-std::vector<Player> readScores(const std::string& filename = "highscores.json");
+//std::vector<Player> readScores(const std::string& filename = "highscores.json");
 
 class SpaceDefender;  // Forward declaration of SpaceDefender to avoid circular dependency
 

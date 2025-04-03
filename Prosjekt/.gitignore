@@ -1,6 +1,8 @@
 # Ignore specific folders
 latex/*
 html/
+subprojects\nlohmann_json-3.11.3
+subprojects\packagecache
 
 # Allow one specific file (e.g., important.pdf)
 !latex/refman.pdf

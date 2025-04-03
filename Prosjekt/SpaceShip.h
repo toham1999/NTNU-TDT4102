@@ -38,7 +38,12 @@ public:
     virtual ~SpaceShip() = default;  /**< Virtual destructor to ensure proper cleanup*/
     virtual void movements(SpaceDefender& window) = 0; /**< Pure virtual function. Is supposed to move the spaceship */
     virtual void shooting(SpaceDefender& window) = 0; /**< Pure virtual function. Is supposed do shooting */
-    void healthReduction() { --health; } /**< Reduces the health of the ship */
+    /**
+     * @brief Reduces the Health of the ship by amount standard 1
+     * 
+     * @param a How much health is reduced
+     */
+    void healthReduction(const int& a = 1) { health -= a; } 
     int getHealth() const {return health;} /**< Getter for health */
     int getPositionX() const {return x;} /**< Getter for position in x-axis */
     int getPositionY() const {return y;} /**< Getter for position in y-axis */
@@ -92,6 +97,6 @@ class SpaceShipEnemy : public SpaceShip {
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image alienImage;
-        ~SpaceShipEnemy() = default;
+        bool operator==(const SpaceShipEnemy& other) const { return x == other.x && y == other.y; }
 };
 
