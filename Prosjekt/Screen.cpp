@@ -121,7 +121,7 @@ void ScreenGame::draw(SpaceDefender& window)
             else{
                 itEnemy++;
             }
-            
+           
         }
         /*
         SpaceShipPlayer player = window.playerShip;
@@ -152,6 +152,7 @@ void ScreenGame::draw(SpaceDefender& window)
             (*it)->move();
             (*it)->draw(window);
             it++;
+
         }
     }
     
@@ -160,7 +161,9 @@ void ScreenGame::draw(SpaceDefender& window)
     // Update spaceship movements and shooting
     window.playerShip.movements(window);
     window.playerShip.shooting(window);
-    
+
+    window.findShipToKill();
+
 }
 
 /**

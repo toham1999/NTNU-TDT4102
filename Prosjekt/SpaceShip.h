@@ -49,7 +49,7 @@ public:
     int getPositionY() const {return y;} /**< Getter for position in y-axis */
     int getShipHeight() const {return shipHeight;} /**< Getter for ship height */
     int getShipWidth() const {return shipWidth;} /**< Getter for ship width */
-    void setShipSpeed(const int &newSpeed) {this->shipSpeed = newSpeed;} /**< Setter for ship speed */
+    void setShipSpeed(const int &newSpeed) {shipSpeed = newSpeed;} /**< Setter for ship speed */
 
 protected:
     int x;

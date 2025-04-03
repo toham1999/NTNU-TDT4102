@@ -12,6 +12,7 @@
 
 #include "SpaceDefender.h"
 #include <iostream>
+#include <random>
 
 
 /**
@@ -114,4 +115,38 @@ void SpaceDefender::run() {
             currentScreen->draw(*this);         // Draw the current screen
         }
     }
+}
+
+/**
+ * @brief Finds the ship to kill
+ * 
+ */
+void SpaceDefender::findShipToKill() {
+    auto now = std::chrono::steady_clock::now();
+    if (enemyShips.empty()) return; // Safety check
+    std::unordered_map<int, SpaceShipEnemy*> lowestShipsMap;
+
+    for (auto & enemyShip : enemyShips) {
+        const int posX = enemyShip.getPositionX();
+        const int posY = enemyShip.getPositionY();
+
+        if (lowestShipsMap.find(posX) == lowestShipsMap.end() || enemyShip.getPositionY() > lowestShipsMap[posX]->getPositionY()) {
+            lowestShipsMap[posX] = &enemyShip;
+        }
+    }
+    std::vector<SpaceShipEnemy*> lowestShips;
+    for (auto& pair : lowestShipsMap) {
+        lowestShips.push_back(pair.second);
+    }
+    // Select a random ship
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(0, lowestShips.size() - 1);
+    SpaceShipEnemy* chosenShip = lowestShips[distr(gen)];
+
+    if (std::chrono::duration_cast<std::chrono::milliseconds>(now - lastShotTimeAlien) >= fireRate) {
+        chosenShip->shooting(*this);
+        lastShotTimeAlien = now;
+    }
+
 }

@@ -41,7 +41,7 @@ void SpaceShipPlayer::shooting(SpaceDefender& window) {
     auto now = std::chrono::steady_clock::now();
     if (window.is_key_down(KeyboardKey::SPACE) && std::chrono::duration_cast<std::chrono::milliseconds>(now - lastShotTime) >= fireRate) {
         std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>(5, 1);  // Create the bullet
-        newBullet->fireWeapon(window);  // Call the fireWeapon method to set the position
+        newBullet->fireWeapon(*this);  // Call the fireWeapon method to set the position
         window.firedWeapons.emplace_back(std::move(newBullet));  // Store the bullet
         lastShotTime = now;
     }
@@ -70,5 +70,7 @@ void SpaceShipEnemy::movements(SpaceDefender& window) {
  * @todo Firerate approximatly same as playership
  */
 void SpaceShipEnemy::shooting(SpaceDefender& window) {
-    (void)window;
+    std::unique_ptr<Bullet> newBullet = std::make_unique<Bullet>(5, 1); 
+    newBullet->fireWeapon(*this);
+    window.firedWeapons.emplace_back(std::move(newBullet));
 }

@@ -42,9 +42,13 @@ private:
     void cb_menu()           {setScreen(std::make_unique<ScreenMenu>()); } /**< Show the menu callback function */
 
 public:
-    SpaceDefender(TDT4102::Point position = {100, 50}, int width = 600, int height = 700, const std::string& title = "Space Defender");
+    SpaceDefender(TDT4102::Point position = {100, 50}, int width = 600, int height = 650, const std::string& title = "Space Defender");
     void setScreen(std::unique_ptr<Screen> newScreen);
     void run();
+    // Helper functions
+    void findShipToKill();
+    std::chrono::steady_clock::time_point lastShotTimeAlien;
+    const std::chrono::milliseconds fireRate = std::chrono::milliseconds(500);
 
     // Buttons
     TDT4102::Button StartGameBtn;
