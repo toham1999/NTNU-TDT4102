@@ -106,6 +106,23 @@ void ScreenGame::draw(SpaceDefender& window)
     for(auto it = window.firedWeapons.begin(); it != window.firedWeapons.end();)
     {  
         bool killShip = false;
+        bool bullethit = false;
+        std::vector<std::unique_ptr<Weapon>>::iterator itHit;        
+        for (auto it2 = window.firedWeapons.begin(); it2 != window.firedWeapons.end(); ++it2) 
+        {
+            if(it != it2)
+            {   
+                if(((*it)->getPositionX() <= (*it2)->getPositionX()+4 && (*it)->getPositionX() + (*it)->getRadius()+4 >= (*it2)->getPositionX())
+                && (abs((*it)->getPositionY() - (*it2)->getPositionY()) <= (*it)->getRadius() )){
+                    //it = window.firedWeapons.erase(it);
+                    //it2 = window.firedWeapons.erase(it2);
+                    //killShip = true;
+                    itHit = it2;
+                    bullethit = true;
+                    break;
+                }
+            }
+        }
         for(auto itEnemy = window.enemyShips.begin(); itEnemy != window.enemyShips.end();)
         {   
             bool checksXPossision = ((*itEnemy)->getPositionX()-(*itEnemy)->getShipWidth() <=(*it)->getPositionX() + (*it)->getRadius() && (*it)->getPositionX() - (*it)->getRadius() <= (*itEnemy)->getPositionX() + (*itEnemy)->getShipWidth());
@@ -145,7 +162,9 @@ void ScreenGame::draw(SpaceDefender& window)
         {
             it = window.firedWeapons.erase(it);
         }
-        else if (killShip){
+        else if (bullethit){
+            it = window.firedWeapons.erase(it);
+            it = window.firedWeapons.erase(itHit);){
             break;
         }
         else if(!killShip){
