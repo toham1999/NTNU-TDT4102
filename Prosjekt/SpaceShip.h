@@ -50,6 +50,7 @@ public:
     int getShipHeight() const {return shipHeight;} /**< Getter for ship height */
     int getShipWidth() const {return shipWidth;} /**< Getter for ship width */
     void setShipSpeed(const int &newSpeed) {shipSpeed = newSpeed;} /**< Setter for ship speed */
+    void setXPosition(const int &newX) {x = newX;} /**< Setter for x-position */
 
 protected:
     int x;

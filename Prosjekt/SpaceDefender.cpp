@@ -72,11 +72,13 @@ SpaceDefender::SpaceDefender(TDT4102::Point position, int width, int height, con
 /**
  * @brief Set the current screen. 
  * 
- *  Replaces the current screen with std::move(newScreen) of the unique_ptr<Screen>
+ * Replaces the current screen with std::move(newScreen) of the unique_ptr<Screen>
  * @param newScreen The new screen that we want to point to
  * @param currentScreen The current screen that the pointer points to
+ * @todo Add reset function
  */
 void SpaceDefender::setScreen(std::unique_ptr<Screen> newScreen) {
+    //currentScreen->reset();
     currentScreen = std::move(newScreen);
 }
 /**
@@ -85,21 +87,14 @@ void SpaceDefender::setScreen(std::unique_ptr<Screen> newScreen) {
  * the unique pointer should be deleated if they have collided
  * @param itEnemy the pointer to the enemy ship
  * @param it the pointer to the weapon class often a bullet
- * @return true if they have collided
- * @return false if not
+ * @return true if they have collided, false if not
  * @todo make the fuction general and happen, ok with takeing in unique pointer adresses
  */
 bool SpaceDefender::checkCollision(std::unique_ptr<SpaceShipEnemy>& itEnemy, std::unique_ptr<Weapon>& it) {
-    
+    (void)itEnemy;
+    (void)it;
     return false;
 }
-
-
-
-
-
-
-
 
 /**
  * @brief Game loop that runs the game until the window is closed
@@ -119,13 +114,24 @@ void SpaceDefender::run() {
 
 /**
  * @brief Finds the ship to kill
- * 
+ * @param now The current time
+ * @param lowestShipsMap The map of the lowest ships in each column
  */
 void SpaceDefender::findShipToKill() {
     auto now = std::chrono::steady_clock::now();
     if (enemyShips.empty()) return; // Safety check
     std::unordered_map<int, SpaceShipEnemy*> lowestShipsMap;
+    /*
+    for (auto & enemyShipPtr : enemyShips) {
+        const int posX = enemyShipPtr->getPositionX();
 
+        bool isInMap = lowestShipsMap.find(posX) != lowestShipsMap.end();
+        bool lowerY = enemyShipPtr->getPositionY() > lowestShipsMap[posX]->getPositionY();
+        if (isInMap || lowerY) {
+            lowestShipsMap[posX] = &*enemyShipPtr;
+        }
+    }
+    */
     for (auto & enemyShip : enemyShips) {
         const int posX = enemyShip->getPositionX();
         const int posY = enemyShip->getPositionY();
@@ -140,9 +146,10 @@ void SpaceDefender::findShipToKill() {
     }
     // Select a random ship
     std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distr(0, lowestShips.size() - 1);
-    SpaceShipEnemy* chosenShip = lowestShips[distr(gen)];
+    std::default_random_engine gen(rd());
+    std::uniform_int_distribution<std::size_t> distribution(0, lowestShips.size() - 1);
+    SpaceShipEnemy* chosenShip = lowestShips[distribution(gen)];
+
 
     if (std::chrono::duration_cast<std::chrono::milliseconds>(now - lastShotTimeAlien) >= fireRate) {
         chosenShip->shooting(*this);
@@ -150,3 +157,19 @@ void SpaceDefender::findShipToKill() {
     }
 
 }
+
+/**
+ * @brief Moves the enemy ships swarm as a whole
+ * 
+ */
+void SpaceDefender::enemySwarmMovement() {
+    bool changeDirection = false;   // Determine if any enemy hits a wall
+    for (auto & enemyShipPtr : enemyShips) {
+        //enemyShipPtr->setXPosition(ene)
+    }
+
+    /*
+    if (changeDirection) {
+        enemySpeed += 1;  // Swarm moves faster after each bounce
+    } */
+}   
