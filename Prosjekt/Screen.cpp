@@ -155,14 +155,12 @@ void ScreenGame::draw(SpaceDefender& window)
 
         }
     }
-    
-    
-    
+
     // Update spaceship movements and shooting
     window.playerShip.movements(window);
     window.playerShip.shooting(window);
     window.findShipToKill();
-    //window.enemySwarmMovement();
+    window.enemySwarmMovement();
 
 }
 

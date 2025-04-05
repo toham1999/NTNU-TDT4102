@@ -81,6 +81,7 @@ void SpaceDefender::setScreen(std::unique_ptr<Screen> newScreen) {
     //currentScreen->reset();
     currentScreen = std::move(newScreen);
 }
+
 /**
  * @brief takes in a pointer to an enemy ship and a pointer to a weapon and checks if they have collided
  * 
@@ -105,7 +106,6 @@ bool SpaceDefender::checkCollision(std::unique_ptr<SpaceShipEnemy>& itEnemy, std
 void SpaceDefender::run() {
     while (!should_close()) {
         next_frame();
-
         if (currentScreen) {
             currentScreen->draw(*this);         // Draw the current screen
         }
@@ -127,7 +127,6 @@ void SpaceDefender::findShipToKill() {
     std::unordered_map<int, SpaceShipEnemy*> lowestShipsMap;
     for (auto & enemyShip : enemyShips) {
         const int posX = enemyShip->getPositionX();
-        const int posY = enemyShip->getPositionY();
 
         if (lowestShipsMap.find(posX) == lowestShipsMap.end() || enemyShip->getPositionY() > lowestShipsMap[posX]->getPositionY()) {
             lowestShipsMap[posX] = &*enemyShip;
@@ -155,13 +154,21 @@ void SpaceDefender::findShipToKill() {
  * 
  */
 void SpaceDefender::enemySwarmMovement() {
-    bool changeDirection = false;   // Determine if any enemy hits a wall
-    for (auto & enemyShipPtr : enemyShips) {
-        //enemyShipPtr->setXPosition(ene)
-    }
 
-    /*
-    if (changeDirection) {
-        enemySpeed += 1;  // Swarm moves faster after each bounce
-    } */
+    for (auto & enemyShipPtr : enemyShips) {
+        if (enemiesShouldDrop) {
+            enemyShipPtr->updatePosition(static_cast<int>(enemySpeed)*enemyDirection,enemyDropDistance);
+            enemiesShouldDrop = false;
+        }
+        else {
+            enemyShipPtr->updatePosition(static_cast<int>(enemySpeed)*enemyDirection);
+        }
+    }
+    for (auto & enemyShipPtr : enemyShips) {
+        if (enemyShipPtr->getPositionX() >= (this->width() - enemyShipPtr->getShipWidth()) || enemyShipPtr->getPositionX() <= 0) {
+            enemyDirection *= -1;
+        }
+    }
+    /** @todo Make the speed better in regards to double vs int, since most functions use int for the positions */
+    enemySpeed = enemyShipCount/static_cast<double>(enemyShips.size());  // Swarm moves faster after each enemy is killed 
 }   

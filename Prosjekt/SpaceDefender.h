@@ -50,13 +50,14 @@ public:
     // Helper functions
     void findShipToKill();
     void enemySwarmMovement();
-    int enemySpeed = 5;                  // Pixels per movement step
+    double enemySpeed = 1.0;                  // Pixels per movement step
     int enemyDirection = 1;              // 1 for right, -1 for left
-    int enemyDropDistance = 30.0;           // Drop when hitting screen edge
+    int enemyDropDistance = 30;           // Drop when hitting screen edge
     bool enemiesShouldDrop = false;           // Trigger drop on next move
+    int enemyShipCount = 50;
 
     std::chrono::steady_clock::time_point lastShotTimeAlien;
-    const std::chrono::milliseconds fireRate = std::chrono::milliseconds(500);
+    const std::chrono::milliseconds fireRate = std::chrono::milliseconds(1000);
 
     // Buttons
     TDT4102::Button StartGameBtn;
