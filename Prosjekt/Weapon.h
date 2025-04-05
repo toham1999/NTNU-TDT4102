@@ -51,7 +51,7 @@ public:
     Bullet(int speed, int damage) : Weapon(speed, damage) {}
     void fireWeapon(SpaceShip& shooter) override;
     void draw(SpaceDefender& window) override;
-    int getRadius() {return radius;} //**< Getter for radius */
+    int getRadius() override {return radius;} //**< Getter for radius */
 private:
     int radius = 5;
 };

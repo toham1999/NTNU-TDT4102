@@ -24,7 +24,7 @@
 int main() {    
     // Create SpaceDefender window and initialize with MenuScreen
     SpaceDefender game{};
-    game.setScreen(std::make_unique<ScreenGame>());
+    game.setScreen(std::make_unique<ScreenMenu>());
     game.run();
     return 0;
 }
