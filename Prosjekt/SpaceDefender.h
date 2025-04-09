@@ -52,8 +52,8 @@ public:
     void enemySwarmMovement();
     double enemySpeed = 1.0;                  // Pixels per movement step
     int enemyDirection = 1;              // 1 for right, -1 for left
-    int enemyDropDistance = 30;           // Drop when hitting screen edge
-    bool enemiesShouldDrop = false;           // Trigger drop on next move
+    int enemyDropDistance = 5;           // Drop when hitting screen edge
+    int enemiesDropCounter = 0;
     int enemyShipCount = 50;
 
     std::chrono::steady_clock::time_point lastShotTimeAlien;

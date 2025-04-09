@@ -96,7 +96,6 @@ class SpaceShipPlayer : public SpaceShip {
         const std::chrono::milliseconds fireRate = std::chrono::milliseconds(500);
 }; 
 
-
 /**
  * @brief Class for enemy ship
  * @class SpaceShipEnemy
@@ -110,6 +109,5 @@ class SpaceShipEnemy : public SpaceShip {
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image alienImage;
-        bool operator==(const SpaceShipEnemy& other) const { return x == other.x && y == other.y; }
+        //bool operator==(const SpaceShipEnemy& other) const { return x == other.x && y == other.y; }
 };
-

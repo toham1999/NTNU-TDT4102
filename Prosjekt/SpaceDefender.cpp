@@ -152,21 +152,32 @@ void SpaceDefender::findShipToKill() {
 /**
  * @brief Moves the enemy ships swarm as a whole
  * 
+ * Updates the position of each enemy ship in the swarm. If any enemy reaches the screen edge, the swarm reverses direction. 
+ * Every 4th edge hit causes the swarm to drop down vertically. 
+ * The swarm speed increases as the number of remaining enemies decreases.
+ * @param enemiesShouldDrop Bool that determines if the swarm should drop when reaching the edge 4 times.
+ * @param deltaX Precompute horizontal movement to avoid repeated computation
  */
 void SpaceDefender::enemySwarmMovement() {
-
+    bool enemiesShouldDrop = false;
     for (auto & enemyShipPtr : enemyShips) {
-        if (enemiesShouldDrop) {
-            enemyShipPtr->updatePosition(static_cast<int>(enemySpeed)*enemyDirection,enemyDropDistance);
-            enemiesShouldDrop = false;
-        }
-        else {
-            enemyShipPtr->updatePosition(static_cast<int>(enemySpeed)*enemyDirection);
+        int posX = enemyShipPtr->getPositionX();
+        int rightEdge = this->width() - enemyShipPtr->getShipWidth() - 10;
+
+        if (posX >= rightEdge || posX <= 10) {
+            enemyDirection *= -1;
+            ++enemiesDropCounter;
+            enemiesShouldDrop = (enemiesDropCounter % 4 == 0);
+            break;  // Only need to change once per frame
         }
     }
+    int deltaX = static_cast<int>(enemySpeed) * enemyDirection;
     for (auto & enemyShipPtr : enemyShips) {
-        if (enemyShipPtr->getPositionX() >= (this->width() - enemyShipPtr->getShipWidth()) || enemyShipPtr->getPositionX() <= 0) {
-            enemyDirection *= -1;
+        if (enemiesShouldDrop) {
+            enemyShipPtr->updatePosition(deltaX,enemyDropDistance);
+        }
+        else {
+            enemyShipPtr->updatePosition(deltaX);
         }
     }
     /** @todo Make the speed better in regards to double vs int, since most functions use int for the positions */
