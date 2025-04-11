@@ -1,6 +1,7 @@
 /**
  * @file SpaceDefender.h
  * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
+ * @author Gabriel Anton Norheim (gabriel.norheim@gmail.com)
  * @brief The header file for the SpaceDefender class
  * @version 1.0
  * @date 2025-04-01
@@ -51,11 +52,14 @@ public:
     void findShipToKill();
     void enemySwarmMovement();
     void writeScores(const std::string& filename);
+    void addHearts();
+    TDT4102::Image heart = TDT4102::Image("bilder/pixel-heart.png");
     double enemySpeed = 1.0;                  // Pixels per movement step
     int enemyDirection = 1;              // 1 for right, -1 for left
     int enemyDropDistance = 7;           // Drop when hitting screen edge
     int enemiesDropCounter = 0;
     int enemyShipCount = 50;
+    int score = 0;
 
     std::chrono::steady_clock::time_point lastShotTimeAlien;
     const std::chrono::milliseconds fireRate = std::chrono::milliseconds(1000);

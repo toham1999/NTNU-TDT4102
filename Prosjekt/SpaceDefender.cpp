@@ -1,7 +1,7 @@
 /**
  * @file SpaceDefender.cpp
  * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
- * @author Gabriel Anton Norheim ()
+ * @author Gabriel Anton Norheim (gabriel.norheim@gmail.com)
  * @brief The cpp file for the SpaceDefender class
  * @version 1.0
  * @date 2025-04-01
@@ -208,4 +208,14 @@ void SpaceDefender::writeScores(const std::string& filename) {
     // Step 4: Write back to the file
 
     */
+}
+/**
+ * @brief draws the hearts for the player on the screen 
+ * 
+ */
+void SpaceDefender::addHearts(){
+    for (int i = 0; i < playerShip.getHealth(); i++){
+        TDT4102::Point position = {100 + i * 30, 10};
+        this->draw_image(position, heart , 20, 20);
+    }
 }
