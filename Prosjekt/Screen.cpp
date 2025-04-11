@@ -153,6 +153,7 @@ void ScreenGame::draw(SpaceDefender& window)
                 window.setScreen(std::move(std::make_unique<ScreenHighscore>()));
 
                 std::cout << "Game Over" << std::endl;
+                window.writeScores("highscores.json");
                 break;
             }
         }
