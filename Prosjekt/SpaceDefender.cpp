@@ -257,6 +257,13 @@ void SpaceDefender::writeScores(const std::string& filename) {
     outFile << jsonData.dump(4);  // pretty print with indent of 4
     }
 
-
-
-    
+/**
+ * @brief draws the hearts for the player on the screen 
+ * 
+ */
+void SpaceDefender::addHearts(){
+    for (int i = 0; i < playerShip.getHealth(); i++){
+        TDT4102::Point position = {100 + i * 30, 10};
+        this->draw_image(position, heart , 20, 20);
+    }
+}
