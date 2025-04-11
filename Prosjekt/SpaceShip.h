@@ -1,6 +1,7 @@
 /**
  * @file SpaceShip.h
  * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
+ * @author Gabriel Anton Norheim (gabriel.norheim@gmail.com)
  * @brief The header file for the SpaceShip class
  * @version 1.0
  * @date 2025-04-01

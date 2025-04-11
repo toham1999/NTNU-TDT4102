@@ -1,7 +1,7 @@
 /**
  * @file SpaceDefender.cpp
  * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
- * @author Gabriel Anton Norheim ()
+ * @author Gabriel Anton Norheim (gabriel.norheim@gmail.com)
  * @brief The cpp file for the SpaceDefender class
  * @version 1.0
  * @date 2025-04-01
@@ -228,7 +228,7 @@ void SpaceDefender::writeScores(const std::string& filename) {
     Player newPlayer;
     newPlayer.rank = "Last";
     newPlayer.name = "Player";
-    newPlayer.score = 111;//this->score;
+    newPlayer.score = this->score;
     newPlayer.round = 1;
     players.push_back(newPlayer);  // newPlayer is assumed to exist
 

@@ -1,6 +1,7 @@
 /**
  * @file Screen.cpp
  * @author Tor Gunnar Ravatn Hammer (tor.ravatn@gmail.com)
+ * @author Gabriel Anton Norheim (gabriel.norheim@gmail.com)
  * @brief The cpp file for the Screen class
  * @version 1.0
  * @date 2025-04-01
@@ -115,6 +116,7 @@ void ScreenGame::draw(SpaceDefender& window)
                 && (abs((*it)->getPositionY() - (*it2)->getPositionY()) <= (*it)->getRadius() + 4 )){
                     itHit = it2;
                     bullethit = true;
+                    window.score += 10;
                     break;
                 }
             }
@@ -127,7 +129,8 @@ void ScreenGame::draw(SpaceDefender& window)
             {
                 (*itEnemy)->healthReduction((*it)->getDamage());
                 if ((*itEnemy)->getHealth() <= 0) {
-                    itEnemy = window.enemyShips.erase(itEnemy); //* @todo update Gamescore*/
+                    itEnemy = window.enemyShips.erase(itEnemy); 
+                    window.score += 100;
                 }
                 killShip = true;
             }
@@ -143,11 +146,12 @@ void ScreenGame::draw(SpaceDefender& window)
         if (checksXPossision&&checksYPossision)
         {
             player.healthReduction((*it)->getDamage());
-            player.setShipSpeed(3);
+            player.setShipSpeed(5);
             killShip = true;
             if (player.getHealth() <= 0) {
                  // fixes to Game over 
                 window.setScreen(std::move(std::make_unique<ScreenHighscore>()));
+
                 std::cout << "Game Over" << std::endl;
                 break;
             }
@@ -184,6 +188,8 @@ void ScreenGame::draw(SpaceDefender& window)
     window.playerShip.shooting(window);
     window.findShipToKill();
     window.enemySwarmMovement();
+    window.addHearts();
+    window.draw_text({window.width() - 200, 10}, "SCORE: " + std::to_string(window.score), TDT4102::Color::white, 20);
 }
 
 /**
