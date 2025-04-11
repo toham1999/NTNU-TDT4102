@@ -23,11 +23,15 @@
  * @param yProjectile Position of the projectile in the y-axis
  */
 void Bullet::fireWeapon(SpaceShip& shooter) {
-    xProjectile = shooter.getPositionX();
+    xProjectile = shooter.getPositionX();   
     yProjectile = shooter.getPositionY();
     if (dynamic_cast<const SpaceShipEnemy*>(&shooter)) {
         setWeaponSpeed(-2);
         yProjectile += shooter.getShipHeight()+1;
+    
+    }
+    else {
+        yProjectile -= 1;
     }
 }
 
