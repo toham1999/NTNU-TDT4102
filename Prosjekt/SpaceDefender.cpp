@@ -112,7 +112,7 @@ void SpaceDefender::run() {
             currentScreen->draw(*this);         // Draw the current screen
         }
     }
-    writeScores("highscores.json");
+    
 }
 
 /**

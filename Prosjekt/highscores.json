@@ -4,83 +4,71 @@
             "player": "Player",
             "rank": "1st",
             "round": 1,
-            "score": 1810
-        },
-        {
-            "player": "Player",
-            "rank": "2nd",
-            "round": 1,
-            "score": 1020
-        },
-        {
-            "player": "Player1",
-            "rank": "3rd",
-            "round": 1,
             "score": 1000
         },
         {
             "player": "Player2",
-            "rank": "4th",
+            "rank": "2nd",
             "round": 1,
             "score": 800
         },
         {
             "player": "Player",
-            "rank": "5th",
+            "rank": "3rd",
             "round": 1,
             "score": 111
         },
         {
             "player": "Player",
-            "rank": "6th",
+            "rank": "4th",
             "round": 1,
             "score": 111
         },
         {
             "player": "Player3",
-            "rank": "7th",
+            "rank": "5th",
             "round": 2,
             "score": 60
         },
         {
             "player": "Player4",
-            "rank": "8th",
+            "rank": "7th",
             "round": 2,
             "score": 50
         },
         {
             "player": "Player5",
-            "rank": "9th",
+            "rank": "7th",
             "round": 3,
             "score": 40
         },
         {
             "player": "Player6",
-            "rank": "10th",
+            "rank": "8th",
             "round": 3,
             "score": 30
         },
         {
             "player": "Player7",
-            "rank": "11th",
+            "rank": "9th",
             "round": 4,
             "score": 25
         },
         {
             "player": "Player8",
-            "rank": "12th",
+            "rank": "10th",
             "round": 4,
             "score": 20
         },
         {
             "player": "Player9",
-            "rank": "13th",
+            "rank": "11th",
             "round": 4,
             "score": 15
         },
         {
             "player": "Player10",
-            "rank": "14th",
+            "rank": "12th",
             "round": 4,
             "score": 10
         }
