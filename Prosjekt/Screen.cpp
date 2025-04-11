@@ -101,15 +101,29 @@ void ScreenGame::draw(SpaceDefender& window)
     window.SettingsBtn.setVisible(false);
     window.EndGameBtn.setVisible(false);
     window.GoToMenuBtn.setVisible(true);
-
+    //std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
     // Update and draw fired weapons
     for(auto it = window.firedWeapons.begin(); it != window.firedWeapons.end();)
     {  
         bool killShip = false;
+        bool bullethit = false;
+        std::vector<std::unique_ptr<Weapon>>::iterator itHit;        
+        for (auto it2 = window.firedWeapons.begin(); it2 != window.firedWeapons.end(); ++it2) 
+        {
+            if(it != it2)
+            {   
+                if(((*it)->getPositionX() <= (*it2)->getPositionX()+4 && (*it)->getPositionX() + (*it)->getRadius()+4 >= (*it2)->getPositionX())
+                && (abs((*it)->getPositionY() - (*it2)->getPositionY()) <= (*it)->getRadius() + 4 )){
+                    itHit = it2;
+                    bullethit = true;
+                    break;
+                }
+            }
+        }
         for(auto itEnemy = window.enemyShips.begin(); itEnemy != window.enemyShips.end();)
         {   
             bool checksXPossision = ((*itEnemy)->getPositionX()-(*itEnemy)->getShipWidth() <=(*it)->getPositionX() + (*it)->getRadius() && (*it)->getPositionX() - (*it)->getRadius() <= (*itEnemy)->getPositionX() + (*itEnemy)->getShipWidth());
-            bool checksYPossision = ((*it)->getPositionY() <= (*itEnemy)->getPositionY() + (*itEnemy)->getShipHeight() && (*itEnemy)->getPositionY() <= (*it)->getPositionY());
+            bool checksYPossision = ((*it)->getPositionY() <= (*itEnemy)->getPositionY() + (*itEnemy)->getShipHeight());
             if(checksXPossision&&checksYPossision)
             {
                 (*itEnemy)->healthReduction((*it)->getDamage());
@@ -123,11 +137,33 @@ void ScreenGame::draw(SpaceDefender& window)
             }
         }
 
+        
+        SpaceShipPlayer& player = window.playerShip;
+        bool checksXPossision = (player.getPositionX()-player.getShipWidth() <=(*it)->getPositionX() + (*it)->getRadius() && (*it)->getPositionX() - (*it)->getRadius() <= player.getPositionX() + player.getShipWidth());
+        bool checksYPossision = (player.getPositionY() < (*it)->getPositionY() && (*it)->getPositionY() < player.getPositionY() + player.getShipHeight());
+        if (checksXPossision&&checksYPossision)
+        {
+            player.healthReduction((*it)->getDamage());
+            player.setShipSpeed(3);
+            killShip = true;
+            if (player.getHealth() <= 0) {
+                 // fixes to Game over 
+                window.setScreen(std::move(std::make_unique<ScreenHighscore>()));
+                std::cout << "Game Over" << std::endl;
+                break;
+            }
+        }
+        
+        //* @todo update hitconditions and make GameOver screen with score*/
+        // Check if the weapon is out of the screen, stops memory leakage WORKS!!!
+        
         if ((*it)->getPositionY() < 10 || killShip || (*it)->getPositionY() > window.height())
         {
             it = window.firedWeapons.erase(it);
         }
-        else if (killShip){
+        else if (bullethit){
+            it = window.firedWeapons.erase(it);
+            it = window.firedWeapons.erase(itHit);
             break;
         }
         else if(!killShip){
@@ -136,6 +172,13 @@ void ScreenGame::draw(SpaceDefender& window)
             it++;
         }
     }
+
+    /*
+    std::chrono::time_point endTime = std::chrono::steady_clock::now();
+    long durationInMicroseconds = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count();
+    double durationInSeconds = double(durationInMicroseconds)/1000000.0;
+    std::cout << durationInSeconds << std::endl;
+    */
 
     // Update spaceship movements and shooting
     window.playerShip.movements(window);

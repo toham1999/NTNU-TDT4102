@@ -1,12 +1,5 @@
 {
-    "tdt4102.isProjectFolder": true,
-    "cmake.configureOnOpen": false,
-    "cmake.autoSelectActiveFolder": false,
-    "cmake.configureOnEdit": false,
-    "makefile.alwaysPreConfigure": false,
     "files.associations": {
-        "vector": "cpp"
-        "any": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -27,12 +20,10 @@
         "cstdint": "cpp",
         "cstdio": "cpp",
         "cstdlib": "cpp",
-        "cstring": "cpp",
         "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
-        "forward_list": "cpp",
         "map": "cpp",
         "set": "cpp",
         "string": "cpp",
@@ -68,7 +59,6 @@
         "new": "cpp",
         "numbers": "cpp",
         "ostream": "cpp",
-        "ranges": "cpp",
         "semaphore": "cpp",
         "span": "cpp",
         "sstream": "cpp",
@@ -78,7 +68,6 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp",
         "variant": "cpp"
     }
 }
