@@ -13,7 +13,9 @@
 #include "SpaceDefender.h"
 #include <iostream>
 #include <random>
-
+#include <fstream>
+#include "nlohmann/json.hpp" 
+using json = nlohmann::json;
 
 /**
  * @brief Construct a new SpaceDefender::SpaceDefender object
@@ -182,4 +184,28 @@ void SpaceDefender::enemySwarmMovement() {
     }
     /** @todo Make the speed better in regards to double vs int, since most functions use int for the positions */
     enemySpeed = enemyShipCount/static_cast<double>(enemyShips.size());  // Swarm moves faster after each enemy is killed 
-}   
+}
+
+
+void SpaceDefender::writeScores(const std::string& filename) {
+    (void)filename;
+    /*
+    std::vector<Player> players;
+    std::ifstream file(filename);
+
+    if (!file) {std::cout << "Error opening file: " << filename << std::endl;}
+    // Step 1: Read existing scores
+    json jsonData;
+    file >> jsonData;
+    for (const auto& entry : jsonData.at("highscores")) {
+        players.push_back({entry.at("rank"), entry.at("player"), entry.at("score"), entry.at("round")});
+    }
+
+    // Step 2: Insert the new player in the right position
+
+    // Step 3: Update ranks
+
+    // Step 4: Write back to the file
+
+    */
+}

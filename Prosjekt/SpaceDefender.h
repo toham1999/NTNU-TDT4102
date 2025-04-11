@@ -50,9 +50,10 @@ public:
     // Helper functions
     void findShipToKill();
     void enemySwarmMovement();
+    void writeScores(const std::string& filename);
     double enemySpeed = 1.0;                  // Pixels per movement step
     int enemyDirection = 1;              // 1 for right, -1 for left
-    int enemyDropDistance = 5;           // Drop when hitting screen edge
+    int enemyDropDistance = 7;           // Drop when hitting screen edge
     int enemiesDropCounter = 0;
     int enemyShipCount = 50;
 
