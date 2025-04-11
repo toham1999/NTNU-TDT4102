@@ -40,16 +40,29 @@ public:
     virtual void shooting(SpaceDefender& window) = 0; /**< Pure virtual function. Is supposed do shooting */
     /**
      * @brief Reduces the Health of the ship by amount standard 1
-     * 
      * @param a How much health is reduced
      */
     void healthReduction(const int& a = 1) { health -= a; } 
     int getHealth() const {return health;} /**< Getter for health */
-    int getPositionX() const {return x;} /**< Getter for position in x-axis */
+    /**
+     * @brief Getter for position in x-axis
+     * @return int 
+     */
+    int getPositionX() const {return x;}
     int getPositionY() const {return y;} /**< Getter for position in y-axis */
     int getShipHeight() const {return shipHeight;} /**< Getter for ship height */
     int getShipWidth() const {return shipWidth;} /**< Getter for ship width */
-    void setShipSpeed(const int &newSpeed) {shipSpeed = newSpeed;} /**< Setter for ship speed */
+    /**
+     * @brief Set the Ship Speed object
+     * @param newSpeed The new speed of the spaceship
+     */
+    void setShipSpeed(const double &newSpeed) {shipSpeed = newSpeed;}
+    /**
+     * @brief Setter for x-position
+     * @param movementX The movement in x-axis
+     * @param movementY The movement in y-axis
+     */
+    void updatePosition(const int &movementX, const int &movementY = 0) {x += movementX; y += movementY;}
 
 protected:
     int x;
@@ -57,7 +70,7 @@ protected:
     int health;
     const int shipHeight = 20;
     const int shipWidth = 20;
-    int shipSpeed;
+    double shipSpeed;
 };
 
 /**
@@ -83,7 +96,6 @@ class SpaceShipPlayer : public SpaceShip {
         const std::chrono::milliseconds fireRate = std::chrono::milliseconds(500);
 }; 
 
-
 /**
  * @brief Class for enemy ship
  * @class SpaceShipEnemy
@@ -97,6 +109,5 @@ class SpaceShipEnemy : public SpaceShip {
         void movements(SpaceDefender& window) override;
         void shooting(SpaceDefender& window) override;
         TDT4102::Image alienImage;
-        bool operator==(const SpaceShipEnemy& other) const { return x == other.x && y == other.y; }
+        //bool operator==(const SpaceShipEnemy& other) const { return x == other.x && y == other.y; }
 };
-

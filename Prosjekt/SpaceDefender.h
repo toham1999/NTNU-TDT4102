@@ -26,6 +26,8 @@
  * @param playerShip PlayerShip object
  * @param enemyShips Vector of EnemyShip objects
  * @param firedWeapons Vector of Weapon objects
+ * @param enemySpeed Speed of the enemy ships swarm
+ * @param enemyDirection Direction of the enemy ships swarm, 1 = right, -1 = left
  * 
  */
 class SpaceDefender : public TDT4102::AnimationWindow {
@@ -47,8 +49,16 @@ public:
     void run();
     // Helper functions
     void findShipToKill();
+    void enemySwarmMovement();
+    void writeScores(const std::string& filename);
+    double enemySpeed = 1.0;                  // Pixels per movement step
+    int enemyDirection = 1;              // 1 for right, -1 for left
+    int enemyDropDistance = 7;           // Drop when hitting screen edge
+    int enemiesDropCounter = 0;
+    int enemyShipCount = 50;
+
     std::chrono::steady_clock::time_point lastShotTimeAlien;
-    const std::chrono::milliseconds fireRate = std::chrono::milliseconds(500);
+    const std::chrono::milliseconds fireRate = std::chrono::milliseconds(1000);
 
     // Buttons
     TDT4102::Button StartGameBtn;

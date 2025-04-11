@@ -16,8 +16,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-//#include "nlohmann/json.hpp" 
-//using json = nlohmann::json;
+#include "nlohmann/json.hpp" 
+using json = nlohmann::json;
 
 /**
  * @brief Reads the highscores from a json file
@@ -25,7 +25,7 @@
  * @param filename The name of the json file to be read
  * @return std::vector<Player> 
  */
-/*
+
 std::vector<Player> readScores(const std::string& filename) {
     std::vector<Player> players;
     std::ifstream file(filename);
@@ -41,7 +41,7 @@ std::vector<Player> readScores(const std::string& filename) {
     }
     return players;
 }
-*/
+
 /**
  * @brief Function to format the text that is drawn for each highscore
  * 
@@ -136,6 +136,7 @@ void ScreenGame::draw(SpaceDefender& window)
                 itEnemy++;
             }
         }
+
         
         SpaceShipPlayer& player = window.playerShip;
         bool checksXPossision = (player.getPositionX()-player.getShipWidth() <=(*it)->getPositionX() + (*it)->getRadius() && (*it)->getPositionX() - (*it)->getRadius() <= player.getPositionX() + player.getShipWidth());
@@ -169,21 +170,21 @@ void ScreenGame::draw(SpaceDefender& window)
             (*it)->move();
             (*it)->draw(window);
             it++;
-
         }
     }
+
     /*
     std::chrono::time_point endTime = std::chrono::steady_clock::now();
     long durationInMicroseconds = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime).count();
     double durationInSeconds = double(durationInMicroseconds)/1000000.0;
     std::cout << durationInSeconds << std::endl;
     */
+
     // Update spaceship movements and shooting
     window.playerShip.movements(window);
     window.playerShip.shooting(window);
-
     window.findShipToKill();
-
+    window.enemySwarmMovement();
 }
 
 /**
@@ -199,16 +200,14 @@ void ScreenHighscore::draw(SpaceDefender& window) {
     window.draw_text({window.width()/2 - window.width()/4, window.height()/20}, "TOP 10 SCORES", TDT4102::Color::aqua,  35);
     // Headline row
     window.draw_text({150, 120}, "Rank  Name - Score  Round", TDT4102::Color::dark_red, 30);
-/*
     std::vector<Player> players = readScores("highscores.json");
-
     int yOffset = 150;
     for (const auto& player : players) {
         std::string text = formatPlayerInfo(player);
         window.draw_text({150, yOffset}, text, TDT4102::Color::white, 25);
         yOffset += 30;
     }
-*/
+
     window.StartGameBtn.setVisible(false);
     window.HighscoresBtn.setVisible(false);
     window.SettingsBtn.setVisible(false);

@@ -5,6 +5,7 @@
     "cmake.configureOnEdit": false,
     "makefile.alwaysPreConfigure": false,
     "files.associations": {
+        "vector": "cpp"
         "any": "cpp",
         "array": "cpp",
         "atomic": "cpp",
