@@ -1,14 +1,76 @@
 {
     "highscores": [
-        { "rank": "1st", "player": "Player1", "score": 1000,"round": 1 },
-        { "rank": "2nd", "player": "Player2", "score": 800, "round": 1 },
-        { "rank": "3rd", "player": "Player3", "score": 60, "round": 2 },
-        { "rank": "4th", "player": "Player4", "score": 50, "round": 2 },
-        { "rank": "5th", "player": "Player5", "score": 40, "round": 3 },
-        { "rank": "6th", "player": "Player6", "score": 30, "round": 3 },
-        { "rank": "7th", "player": "Player7", "score": 25, "round": 4 },
-        { "rank": "8th", "player": "Player8", "score": 20, "round": 4 },
-        { "rank": "9th", "player": "Player9", "score": 15, "round": 4 },
-        { "rank": "10th","player": "Player10","score": 10, "round": 4 }
+        {
+            "player": "Player1",
+            "rank": "1st",
+            "round": 1,
+            "score": 1000
+        },
+        {
+            "player": "Player2",
+            "rank": "2nd",
+            "round": 1,
+            "score": 800
+        },
+        {
+            "player": "Player",
+            "rank": "3rd",
+            "round": 1,
+            "score": 111
+        },
+        {
+            "player": "Player",
+            "rank": "4th",
+            "round": 1,
+            "score": 111
+        },
+        {
+            "player": "Player3",
+            "rank": "5th",
+            "round": 2,
+            "score": 60
+        },
+        {
+            "player": "Player4",
+            "rank": "6th",
+            "round": 2,
+            "score": 50
+        },
+        {
+            "player": "Player5",
+            "rank": "7th",
+            "round": 3,
+            "score": 40
+        },
+        {
+            "player": "Player6",
+            "rank": "8th",
+            "round": 3,
+            "score": 30
+        },
+        {
+            "player": "Player7",
+            "rank": "9th",
+            "round": 4,
+            "score": 25
+        },
+        {
+            "player": "Player8",
+            "rank": "10th",
+            "round": 4,
+            "score": 20
+        },
+        {
+            "player": "Player9",
+            "rank": "11th",
+            "round": 4,
+            "score": 15
+        },
+        {
+            "player": "Player10",
+            "rank": "12th",
+            "round": 4,
+            "score": 10
+        }
     ]
 }

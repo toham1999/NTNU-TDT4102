@@ -14,8 +14,8 @@
 #include <iostream>
 #include <random>
 #include <fstream>
-//#include "subprojects\nlohmann_json.wrap" 
-//using json = nlohmann::json;
+#include "nlohmann/json.hpp" 
+using json = nlohmann::json;
 
 /**
  * @brief Construct a new SpaceDefender::SpaceDefender object
@@ -112,6 +112,7 @@ void SpaceDefender::run() {
             currentScreen->draw(*this);         // Draw the current screen
         }
     }
+    writeScores("highscores.json");
 }
 
 /**
@@ -186,10 +187,32 @@ void SpaceDefender::enemySwarmMovement() {
     enemySpeed = enemyShipCount/static_cast<double>(enemyShips.size());  // Swarm moves faster after each enemy is killed 
 }
 
+/**
+ * @brief Get the Ordinal object
+ * 
+ * @param number 
+ * @return std::string 
+ */
+std::string getOrdinal(int number) {
+    if (number % 100 >= 11 && number % 100 <= 13)
+        return std::to_string(number) + "th";
 
+    switch (number % 10) {
+        case 1: return std::to_string(number) + "st";
+        case 2: return std::to_string(number) + "nd";
+        case 3: return std::to_string(number) + "rd";
+        default: return std::to_string(number) + "th";
+    }
+}
+
+/**
+ * @brief 
+ * 
+ * @param filename 
+ */
 void SpaceDefender::writeScores(const std::string& filename) {
     (void)filename;
-    /*
+    
     std::vector<Player> players;
     std::ifstream file(filename);
 
@@ -201,11 +224,39 @@ void SpaceDefender::writeScores(const std::string& filename) {
         players.push_back({entry.at("rank"), entry.at("player"), entry.at("score"), entry.at("round")});
     }
 
-    // Step 2: Insert the new player in the right position
+    // Step 2: Add the new player
+    Player newPlayer;
+    newPlayer.rank = "Last";
+    newPlayer.name = "Player";
+    newPlayer.score = 111;//this->score;
+    newPlayer.round = 1;
+    players.push_back(newPlayer);  // newPlayer is assumed to exist
 
-    // Step 3: Update ranks
+    // Step 3: Sort by score in descending order
+     std::sort(players.begin(), players.end(), [](const Player& a, const Player& b) {
+         return a.score > b.score;
+     });
+ 
+    // Step 4: Reassign ranks
+    for (size_t i = 0; i < players.size(); ++i) {
+        players[i].rank = getOrdinal(static_cast<int>(i + 1));
+    }
+    
+    // Step 5: Serialize back to JSON
+    jsonData["highscores"].clear();
+    for (const auto& player : players) {
+        jsonData["highscores"].push_back({
+            {"rank", player.rank},
+            {"player", player.name},
+            {"score", player.score},
+            {"round", player.round}
+        });
+    }
+    // Step 6: Write to file
+    std::ofstream outFile(filename);
+    outFile << jsonData.dump(4);  // pretty print with indent of 4
+    }
 
-    // Step 4: Write back to the file
 
-    */
-}
+
+    
