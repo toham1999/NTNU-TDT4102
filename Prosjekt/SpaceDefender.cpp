@@ -14,8 +14,8 @@
 #include <iostream>
 #include <random>
 #include <fstream>
-#include "nlohmann/json.hpp" 
-using json = nlohmann::json;
+//#include "subprojects\nlohmann_json.wrap" 
+//using json = nlohmann::json;
 
 /**
  * @brief Construct a new SpaceDefender::SpaceDefender object

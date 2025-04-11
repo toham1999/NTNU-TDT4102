@@ -1,6 +1,5 @@
 {
     "configurations": [
-        
         {
             "name": "Build and Run Debug",
             "type": "lldb",

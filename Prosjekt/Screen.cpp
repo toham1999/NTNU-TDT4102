@@ -16,8 +16,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include "nlohmann/json.hpp" 
-using json = nlohmann::json;
+//#include "nlohmann/json.hpp" 
+//using json = nlohmann::json;
 
 /**
  * @brief Reads the highscores from a json file
@@ -25,7 +25,7 @@ using json = nlohmann::json;
  * @param filename The name of the json file to be read
  * @return std::vector<Player> 
  */
-
+/*
 std::vector<Player> readScores(const std::string& filename) {
     std::vector<Player> players;
     std::ifstream file(filename);
@@ -39,8 +39,8 @@ std::vector<Player> readScores(const std::string& filename) {
     for (const auto& entry : jsonData.at("highscores")) {
         players.push_back({entry.at("rank"), entry.at("player"), entry.at("score"), entry.at("round")});
     }
-    return players;
-}
+    return players; 
+}*/
 
 /**
  * @brief Function to format the text that is drawn for each highscore
@@ -199,7 +199,9 @@ void ScreenGame::draw(SpaceDefender& window)
 void ScreenHighscore::draw(SpaceDefender& window) {
     window.draw_text({window.width()/2 - window.width()/4, window.height()/20}, "TOP 10 SCORES", TDT4102::Color::aqua,  35);
     // Headline row
+    
     window.draw_text({150, 120}, "Rank  Name - Score  Round", TDT4102::Color::dark_red, 30);
+    /*
     std::vector<Player> players = readScores("highscores.json");
     int yOffset = 150;
     for (const auto& player : players) {
@@ -207,7 +209,7 @@ void ScreenHighscore::draw(SpaceDefender& window) {
         window.draw_text({150, yOffset}, text, TDT4102::Color::white, 25);
         yOffset += 30;
     }
-
+    */
     window.StartGameBtn.setVisible(false);
     window.HighscoresBtn.setVisible(false);
     window.SettingsBtn.setVisible(false);
